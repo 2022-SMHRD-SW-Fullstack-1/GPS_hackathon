@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_begin="66dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_end="66dp" />
 
     <ImageView
         android:id="@+id/imgContent"
@@ -61,5 +61,17 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2">
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="위치확인"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/imgLogout"
+        app:layout_constraintStart_toEndOf="@+id/imgContent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

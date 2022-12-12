@@ -1,11 +1,14 @@
 package com.example.gps
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.gps.fragment.*
+import com.example.gps.location.LocationActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +19,12 @@ class MainActivity : AppCompatActivity() {
         val bnv = findViewById<BottomNavigationView>(R.id.bnv)
         val fl = findViewById<FrameLayout>(R.id.fl)
         val imgLogout = findViewById<ImageView>(R.id.imgLogout)
+        val tvMap = findViewById<TextView>(R.id.tvMap)
+
+        tvMap.setOnClickListener {
+            val intent = Intent(this@MainActivity, MapActivity::class.java)
+            startActivity(intent)
+        }
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,
