@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.UserActivity">
+
+    <EditText
+        android:id="@+id/etInfoNick"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etInfoPwCk"
+        app:layout_constraintStart_toStartOf="@+id/etInfoPwCk"
+        app:layout_constraintTop_toBottomOf="@+id/etInfoPwCk" />
+
+    <EditText
+        android:id="@+id/etInfoPwCk"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etInfoPw"
+        app:layout_constraintStart_toStartOf="@+id/etInfoPw"
+        app:layout_constraintTop_toBottomOf="@+id/etInfoPw" />
+
+    <TextView
+        android:id="@+id/tvInfoEmail"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:text="이메일"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivInfoProfile" />
+
+    <EditText
+        android:id="@+id/etInfoPw"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoEmail"
+        app:layout_constraintStart_toStartOf="@+id/tvInfoEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoEmail" />
+
+    <Button
+        android:id="@+id/btnInfoOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        app:layout_constraintEnd_toEndOf="@+id/etInfoNick"
+        app:layout_constraintStart_toStartOf="@+id/etInfoNick"
+        app:layout_constraintTop_toBottomOf="@+id/etInfoNick" />
+
+    <Button
+        android:id="@+id/btnInfoDelAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원탈퇴"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivInfoProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+</androidx.constraintlayout.widget.ConstraintLayout>
