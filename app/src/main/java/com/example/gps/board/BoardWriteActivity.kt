@@ -15,6 +15,7 @@ import com.example.gps.utils.FBdatabase
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import android.text.Editable
 
 class BoardWriteActivity : AppCompatActivity() {
 
@@ -29,6 +30,17 @@ class BoardWriteActivity : AppCompatActivity() {
         val etTitle = findViewById<EditText>(R.id.etTitle)
         val etContent = findViewById<EditText>(R.id.etContent)
         val imgWrite = findViewById<ImageView>(R.id.imgWrite)
+
+        val title = intent.getStringExtra("title")
+        val content = intent.getStringExtra("content")
+
+        if(title != null) {
+            etTitle.setText(title.toString())
+            etContent.setText(content.toString())
+        }
+
+
+
 
         //이미지 불러오기
         //갤러리로 이동해서 이미지를 받아오는 역할

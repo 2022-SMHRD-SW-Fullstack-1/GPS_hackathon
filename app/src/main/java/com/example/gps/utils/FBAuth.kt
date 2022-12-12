@@ -1,5 +1,6 @@
 package com.example.gps.utils
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
@@ -11,6 +12,7 @@ class FBAuth {
         fun getUid(): String {
 
             auth = FirebaseAuth.getInstance()
+
 
             //리턴 타입 String으로 지정해놨기 때문에 toString 안해줘도 됨
             return auth.currentUser!!.uid
