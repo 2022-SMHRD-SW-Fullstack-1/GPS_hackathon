@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".board.BoardActivity">
+
+    <ImageView
+        android:id="@+id/imgKing"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/splash5" />
+
+    <TextView
+        android:id="@+id/tvLikstCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아요 개수"
+        app:layout_constraintStart_toStartOf="@+id/imgKing"
+        app:layout_constraintTop_toBottomOf="@+id/imgKing" />
+
+    <ImageView
+        android:id="@+id/imgComment"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@+id/imgLike"
+        app:layout_constraintTop_toBottomOf="@+id/tvLikstCount"
+        app:srcCompat="@drawable/ic_baseline_chat_24" />
+
+    <ImageView
+        android:id="@+id/imgLike"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="@+id/imgKing"
+        app:layout_constraintTop_toBottomOf="@+id/tvLikstCount"
+        app:srcCompat="@drawable/likeup" />
+
+    <ImageView
+        android:id="@+id/imgBookMark"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@+id/imgComment"
+        app:layout_constraintTop_toTopOf="@+id/imgComment"
+        app:srcCompat="@drawable/mark_white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
