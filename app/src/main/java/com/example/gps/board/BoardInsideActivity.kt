@@ -16,6 +16,7 @@ import com.example.gps.R
 import com.example.gps.SplashActivity
 import com.example.gps.utils.FBAuth.Companion.auth
 import com.example.gps.utils.FBAuth.Companion.getUid
+import com.example.gps.utils.FBdatabase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
@@ -23,7 +24,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 
-class BoardInsideActivity : AppCompatActivity() {
+class BoardInsideActivity() : AppCompatActivity() {
 
     lateinit var imgIn: ImageView
     val database = Firebase.database
@@ -74,12 +75,14 @@ class BoardInsideActivity : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
+        var key= FBdatabase.getBoardRef().push().key.toString()
             Toast.makeText(this, "좋아요...", Toast.LENGTH_SHORT).show()
                 val bookmarkRef=database.getReference("bookmarklist")
             if(like==false){
                 like=true
             imgLike.setImageResource(R.drawable.like)
                 cnt++
+        FBdatabase.getBoardRef().child(key).setValue(BoardVO())
 
             }else{
                 like=false
