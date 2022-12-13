@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,8 +13,9 @@ import android.widget.Toast
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+import com.example.gps.utils.FBAuth.Companion.auth
+import com.example.gps.utils.FBAuth.Companion.getUid
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -24,13 +26,11 @@ class BoardInsideActivity : AppCompatActivity() {
 
     lateinit var imgIn: ImageView
 
-    val auth : FirebaseAuth =Firebase.auth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
 
-        //Firebase
-        val database=Firebase.database
+        //게시글 상세페이지
 
         //id값
         val tvInTitle = findViewById<TextView>(R.id.tvInTitle)
@@ -45,15 +45,21 @@ class BoardInsideActivity : AppCompatActivity() {
         val imgLike = findViewById<ImageView>(R.id.imgLike)
         val imgComment = findViewById<ImageView>(R.id.imgComment)
         val imgBookMark = findViewById<ImageView>(R.id.imgBookMark)
+        val id = getUid()
+//
         imgIn = findViewById(R.id.imgIn)
+
+
 
         //해당 게시물의 상세내용을 가져와서 set해주자!
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
         val time = intent.getStringExtra("time")
+        val k = intent.getStringExtra("key")
 
         //이미지를 Firebase에서 꺼내올 때 사용할 거임
         val key = intent.getStringExtra("key")
+        val uid = intent.getStringExtra("uid")
 
         var like : Boolean = false
         var mark : Boolean = false
@@ -62,6 +68,8 @@ class BoardInsideActivity : AppCompatActivity() {
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
+        Log.d("개빡치네",id)
+        Log.d("개빡치네2",uid!!)
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
@@ -93,41 +101,75 @@ class BoardInsideActivity : AppCompatActivity() {
 
         //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
         //받아온 이미지 key값을 넘겨주기!
-        getImageData(key.toString())
 
+
+        if(id != uid){
+
+                btnEdit.visibility = View.INVISIBLE
+                btnRemove.visibility = View.INVISIBLE
+            }
+
+
+        if (id == uid){
         btnEdit.setOnClickListener {
 
+            val db = Firebase.database
+
+            // 보드
+            val Content = db.getReference("board").child(k.toString())
+            Content.setValue(null)
+
+
             val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
-            intent.putExtra("title", title)
-            intent.putExtra("content", content)
+            intent.putExtra("title",title)
+            intent.putExtra("content",content)
+            intent.putExtra("key",key)
+
+
 //            intent.putExtra("image",content)
             startActivity(intent)
         }
+
+
 
         btnRemove.setOnClickListener {
             val mDatabase = FirebaseDatabase.getInstance();
             val dataRef = mDatabase.getReference("board");
 
             dataRef.removeValue();
+            finish()
         }
+
+
+
+        }
+
+
+
+
     }
+
+
 
 
     // Image를 가져오는 함수 만들기
-    fun getImageData(key: String) {
+    fun getImageData(key : String){
         val storageReference = Firebase.storage.reference.child("$key.png")
 
-        storageReference.downloadUrl.addOnCompleteListener { task ->
+        storageReference.downloadUrl.addOnCompleteListener { task->
             //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
-//            if (task.isSuccessful){
-//                Glide.with(this)
-//                    .load(task.result)
-//                    //into : imgIn에 업로드 하라는 것!
-//                    .into(imgIn)
-//
-//            }
+            if (task.isSuccessful){
+                Glide.with(this)
+                    .load(task.result)
+                    //into : imgIn에 업로드 하라는 것!
+                    .into(imgIn)
+
+            }
         }
 
+
     }
+
+
 
 }

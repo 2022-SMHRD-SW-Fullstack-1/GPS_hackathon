@@ -16,10 +16,13 @@ import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.ou
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import android.text.Editable
+import com.bumptech.glide.Glide
+import kotlin.random.Random
 
 class BoardWriteActivity : AppCompatActivity() {
 
     lateinit var imgLoad: ImageView
+    lateinit var imgIn: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,15 +36,16 @@ class BoardWriteActivity : AppCompatActivity() {
 
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
+        val key = intent.getStringExtra("key")
 
         if(title != null) {
             etTitle.setText(title.toString())
             etContent.setText(content.toString())
         }
 
-
-
-
+//        if(key != null) {
+//            getImageData(key.toString())
+//        }
         //이미지 불러오기
         //갤러리로 이동해서 이미지를 받아오는 역할
         imgLoad.setOnClickListener {
@@ -71,13 +75,14 @@ class BoardWriteActivity : AppCompatActivity() {
             val uid = FBAuth.getUid()
             //현재 시간을 가지고 올 수 있는 캘린더
             val time = FBAuth.getTime()
+            val id = (1..1000).random()
 
             //setValue가 되기 전에 미리 BoardVO가 저장될 key값 설정!(uid값을 만들자)
             var key = FBdatabase.getBoardRef().push().key.toString()//uid값을 먼저 만들어줌
 
             //DB에 게시글 작성한 내용 보내기
             //먼저 만들어진 uid를 게시글에 부착!
-            FBdatabase.getBoardRef().child(key).setValue(BoardVO(title, content, uid, time))
+            FBdatabase.getBoardRef().child(key).setValue(BoardVO(title, content, uid, time,key))
 
             //부착된 키값을 이미지에도 같이 부착!
             imgUpload(key)
@@ -128,4 +133,23 @@ class BoardWriteActivity : AppCompatActivity() {
 
 
     }
+
+    // Image를 가져오는 함수 만들기
+    fun getImageData(key : String){
+        val storageReference = Firebase.storage.reference.child("$key.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task->
+            //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
+            if (task.isSuccessful){
+                Glide.with(this)
+                    .load(task.result)
+                    //into : imgIn에 업로드 하라는 것!
+                    .into(imgIn)
+
+            }
+        }
+
+
+    }
+
 }

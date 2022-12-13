@@ -71,6 +71,9 @@ class OotdFragment : Fragment() {
                 intent.putExtra("content", boardList[position].content)
                 //이미지 key 넘겨주기
                 intent.putExtra("key", keyData[position])
+                intent.putExtra("uid", boardList[position].uid)
+
+
 
                 startActivity(intent)
 
