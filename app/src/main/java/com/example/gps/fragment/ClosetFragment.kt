@@ -63,6 +63,7 @@ class ClosetFragment : Fragment() {
 
         btnChangeProfile.setOnClickListener {
             val intent = Intent(context, ProfileActivity::class.java)
+            intent.putExtra("nick", nickname)
             startActivity(intent)
         }
 

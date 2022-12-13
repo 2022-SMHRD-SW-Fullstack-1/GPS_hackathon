@@ -31,10 +31,10 @@ class ProfileActivity : AppCompatActivity() {
 
         infoRef = FBdatabase.getUserRef()
 
-        Log.d("프로필닉네임", Nickname.getNickname())
+        val currentNick = intent.getStringExtra("nick")
+        Log.d("프로필닉네임", currentNick.toString())
 
-//        val nick = Nickname.getNickname()
-//        etInfoNick.setText(nick)
+        etInfoNick.setText(currentNick)
 
         imgChangeProfile.setOnClickListener {
 
