@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.*
 
 internal class MapActivity : BaseActivity(), OnMapReadyCallback {
 
+
     //현재위치
     private lateinit var mMap: GoogleMap
 
@@ -55,7 +56,7 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         //getMapAsync() 메소드를 호출하여 GoogleMap 객체가 준비될 때 실행될 콜백을 등록
-        mapFragment.getMapAsync(this)
+//        mapFragment.getMapAsync(this)
 
     }//onCreate 닫힘
 
@@ -80,18 +81,31 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {// onMapReadyCallback 메서드 오버라이드
         mMap = googleMap
 
+        val SEOUL = LatLng(37.56, 126.97)
+        val markerOptions = MarkerOptions()
+        //MarkerOptions: 마커가 표시될 위치(position), 마커에 표시될 타이틀(title), 마커 클릭시 보여주는 간단한 설명(snippet)
+        markerOptions.position(SEOUL)
+        markerOptions.title("서울")
+        markerOptions.snippet("한국의 수도")
+        //addMarker 메소드로 GoogleMap 객체에 추가해주면 지도에 표시
+        mMap.addMarker(markerOptions)
+
+        //moveCamera 메소드를 사용하여 카메라를 지정한 경도, 위도로 이동
+        //1 단계로 지정하면 세계지도 수준으로 보이고 숫자가 커질수록 상세지도
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 15.5f))
+
         // 현재 위치를 검색하기 위해서 FusedLocationProviderClient 사용
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         updateLocation()
 
         /* 마커 아이콘 설정 */
-        var bitmapDrawable: BitmapDrawable
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            bitmapDrawable = getDrawable(R.drawable.icon_here) as BitmapDrawable
-        } else {
-            bitmapDrawable = resources.getDrawable(R.drawable.icon_here) as BitmapDrawable
-        }
-        discriptor = BitmapDescriptorFactory.fromBitmap(bitmapDrawable.bitmap)
+//        var bitmapDrawable: BitmapDrawable
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            bitmapDrawable = getDrawable(R.drawable.icon_here) as BitmapDrawable
+//        } else {
+//            bitmapDrawable = resources.getDrawable(R.drawable.icon_here) as BitmapDrawable
+//        }
+//        discriptor = BitmapDescriptorFactory.fromBitmap(bitmapDrawable.bitmap)
 
     }
 
@@ -101,7 +115,7 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         val locationRequest = LocationRequest.create()
         locationRequest.run {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = 1000
+            interval = 5000
         }
 
         locationCallback = object : LocationCallback() {  // 해당 주기마다 반환받을 locationCallback
@@ -117,6 +131,19 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
 
+    }
+
+    //마커 활성화하며 이동
+    fun moveCamera(map: GoogleMap, marker: Marker) {
+        map.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    marker.position.latitude,
+                    marker.position.longitude
+                ), 16f
+            )
+        )
+        marker.showInfoWindow()
     }
 
     fun setLastLocation(lastLocation: Location) {
@@ -140,9 +167,13 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         mMap.clear()  // 마커를 지도에 반영하기 전에 clear를 사용해서 이전에 그려진 마커가 있으면 지운다.
         mMap.addMarker(markerOptions)  // 지도에 마커를 추가
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+//        moveCamera(mMap)
         // CameraUpdateFactory.newCameraPosition(cameraPosition) : 카메라 포지션에 지도에서 사용할 수 있는 카메라 정보가 생성된다.
         // mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)) : 카메라 포지션을 기준으로 지도의 위치, 배율, 기울기 등이 변경돼서 표시된다.
     }
+
+
+
 
 }
 

@@ -4,13 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_main"
+    android:orientation="vertical"
     tools:context=".MapActivity">
 
-<fragment
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/map"
-    tools:context=".MapActivity"
-    android:name="com.google.android.gms.maps.SupportMapFragment" />
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:id="@+id/map"
+        tools:context=".MapActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        tools:ignore="MissingConstraints" />
+
+<!--  현재 위치를 나타내는 버튼  -->
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/btnCurrentLocation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+    <Button
+        android:text="장소검색"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:id="@+id/button"
+        tools:ignore="MissingConstraints" />
+
+<!--  로딩 상태  -->
+    <ProgressBar
+        android:id="@+id/progressCircular"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
