@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
@@ -25,7 +26,7 @@ import com.google.firebase.storage.ktx.storage
 class BoardInsideActivity : AppCompatActivity() {
 
     lateinit var imgIn: ImageView
-
+    val database = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
