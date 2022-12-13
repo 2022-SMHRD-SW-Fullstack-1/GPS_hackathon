@@ -47,7 +47,7 @@ class BoardInsideActivity : AppCompatActivity() {
         val imgComment = findViewById<ImageView>(R.id.imgComment)
         val imgBookMark = findViewById<ImageView>(R.id.imgBookMark)
         val id = getUid()
-//
+
         imgIn = findViewById(R.id.imgIn)
 
 
@@ -69,8 +69,8 @@ class BoardInsideActivity : AppCompatActivity() {
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
-        Log.d("개빡치네",id)
-        Log.d("개빡치네2",uid!!)
+//        Log.d("개빡치네",id)
+//        Log.d("개빡치네2",uid!!)
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
