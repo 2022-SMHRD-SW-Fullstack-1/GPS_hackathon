@@ -25,15 +25,15 @@
         app:layout_constraintTop_toBottomOf="@+id/imgKing" />
 
     <ImageView
-        android:id="@+id/imgComment"
+        android:id="@+id/imgComment1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintStart_toEndOf="@+id/imgLike"
+        app:layout_constraintStart_toEndOf="@+id/img1123"
         app:layout_constraintTop_toBottomOf="@+id/tvLikstCount"
         app:srcCompat="@drawable/ic_baseline_chat_24" />
 
     <ImageView
-        android:id="@+id/imgLike"
+        android:id="@+id/img1123"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="@+id/imgKing"
@@ -41,11 +41,11 @@
         app:srcCompat="@drawable/likeup" />
 
     <ImageView
-        android:id="@+id/imgBookMark"
+        android:id="@+id/imgBookMark1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintStart_toEndOf="@+id/imgComment"
-        app:layout_constraintTop_toTopOf="@+id/imgComment"
+        app:layout_constraintStart_toEndOf="@+id/imgComment1"
+        app:layout_constraintTop_toTopOf="@+id/imgComment1"
         app:srcCompat="@drawable/mark_white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

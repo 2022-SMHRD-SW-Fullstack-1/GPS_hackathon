@@ -8,7 +8,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import android.widget.Toast
+
 import com.example.gps.R
 import com.example.gps.SplashActivity
 import com.google.firebase.database.FirebaseDatabase
@@ -34,6 +35,11 @@ class BoardInsideActivity : AppCompatActivity() {
         val btnEdit = findViewById<Button>(R.id.btnEdit)
         val btnRemove = findViewById<Button>(R.id.btnRemove)
 
+
+       val tvLikeCount=findViewById<TextView>(R.id.tvLikeCount)
+       val imgLike=findViewById<ImageView>(R.id.imgLike)
+       val imgComment=findViewById<ImageView>(R.id.imgComment)
+       val imgBookMark=findViewById<ImageView>(R.id.imgBookMark)
         imgIn = findViewById(R.id.imgIn)
 
         //해당 게시물의 상세내용을 가져와서 set해주자!
@@ -48,7 +54,10 @@ class BoardInsideActivity : AppCompatActivity() {
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
-
+        imgLike.setOnClickListener {
+            Toast.makeText(this,"안녕",Toast.LENGTH_SHORT).show()
+//            imgLike.setImageResource()
+        }
 
         //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
         //받아온 이미지 key값을 넘겨주기!
@@ -68,16 +77,8 @@ class BoardInsideActivity : AppCompatActivity() {
             val dataRef = mDatabase.getReference("board");
 
             dataRef.removeValue();
-
-
         }
-
-
-
-
     }
-
-
 
 
     // Image를 가져오는 함수 만들기
@@ -86,18 +87,15 @@ class BoardInsideActivity : AppCompatActivity() {
 
         storageReference.downloadUrl.addOnCompleteListener { task->
             //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
-            if (task.isSuccessful){
-                Glide.with(this)
-                    .load(task.result)
-                    //into : imgIn에 업로드 하라는 것!
-                    .into(imgIn)
-
-            }
+//            if (task.isSuccessful){
+//                Glide.with(this)
+//                    .load(task.result)
+//                    //into : imgIn에 업로드 하라는 것!
+//                    .into(imgIn)
+//
+//            }
         }
 
-
     }
-
-
 
 }

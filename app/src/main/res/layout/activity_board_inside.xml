@@ -35,22 +35,23 @@
         android:id="@+id/tvInContent"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="#E8E8E8"
         android:text="게시글 내용"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvInTime"
-        app:layout_constraintTop_toBottomOf="@+id/tvInTime" />
+        app:layout_constraintTop_toBottomOf="@+id/imgComment" />
 
     <ImageView
         android:id="@+id/imgIn"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/tvInContent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tvInContent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInContent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInTime"
         app:srcCompat="@drawable/kim_contact" />
 
     <Button
@@ -76,6 +77,38 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvInTitle" />
+
+    <TextView
+        android:id="@+id/tvLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아요 개수"
+        app:layout_constraintStart_toStartOf="@+id/imgIn"
+        app:layout_constraintTop_toBottomOf="@+id/imgIn" />
+
+    <ImageView
+        android:id="@+id/imgComment"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toEndOf="@+id/imgLike"
+        app:layout_constraintTop_toTopOf="@+id/imgLike"
+        app:srcCompat="@drawable/ic_baseline_chat_24" />
+
+    <ImageView
+        android:id="@+id/imgBookMark"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toEndOf="@+id/imgComment"
+        app:layout_constraintTop_toTopOf="@+id/imgComment"
+        app:srcCompat="@drawable/mark_white" />
+
+    <ImageView
+        android:id="@+id/imgLike"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="@+id/tvLikeCount"
+        app:layout_constraintTop_toBottomOf="@+id/tvLikeCount"
+        app:srcCompat="@drawable/likeup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
