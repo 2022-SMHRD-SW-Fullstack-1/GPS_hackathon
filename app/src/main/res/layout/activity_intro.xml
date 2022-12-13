@@ -20,10 +20,11 @@
         android:id="@+id/btnUserLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="로그인"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginPw" />
+        app:layout_constraintTop_toBottomOf="@+id/cbEmailSave" />
 
     <TextView
         android:id="@+id/textView"
@@ -86,4 +87,12 @@
         app:layout_constraintEnd_toEndOf="@+id/etLoginEmail"
         app:layout_constraintStart_toStartOf="@+id/etLoginEmail"
         app:layout_constraintTop_toBottomOf="@+id/etLoginEmail" />
+
+    <CheckBox
+        android:id="@+id/cbEmailSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아이디 저장"
+        app:layout_constraintStart_toStartOf="@+id/etLoginPw"
+        app:layout_constraintTop_toBottomOf="@+id/etLoginPw" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.*
+import com.example.fullstackapplication.utils.FBAuth
+import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -29,8 +31,7 @@ class JoinActivity : AppCompatActivity() {
         val cbJoinCk = findViewById<CheckBox>(R.id.cbJoinCk)
 
         auth = Firebase.auth
-        val db = Firebase.database
-        val userRef = db.getReference("users")
+        val userRef = FBdatabase.getUserRef()
 
         val userList = ArrayList<JoinVO>()
 
@@ -97,7 +98,7 @@ class JoinActivity : AppCompatActivity() {
                         // task : 보낸 후 결과값이 담겨 있음(성공 or 실패)
                         if (task.isSuccessful) {
                             // 성공했을 때 실행 시킬 코드
-                            val uid = task.getResult().getUser()?.getUid()
+                            val uid = FBAuth.getUid()
 
                             val userInfo = JoinVO(uid, nick, "임의의값")
                             userRef.push().setValue(userInfo)
@@ -105,6 +106,7 @@ class JoinActivity : AppCompatActivity() {
                             Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@JoinActivity, IntroActivity::class.java)
                             startActivity(intent)
+
                             finish()
                         } else {
                             // 실패했을 때 실행 시킬 코드

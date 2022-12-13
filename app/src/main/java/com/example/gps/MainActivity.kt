@@ -1,12 +1,15 @@
 package com.example.gps
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.example.gps.fragment.*
+import com.example.gps.user.IntroActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         val bnv = findViewById<BottomNavigationView>(R.id.bnv)
         val fl = findViewById<FrameLayout>(R.id.fl)
         val imgLogout = findViewById<ImageView>(R.id.imgLogout)
+
+        imgLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,

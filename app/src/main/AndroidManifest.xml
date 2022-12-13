@@ -13,6 +13,13 @@
         android:theme="@style/Theme.GPS"
         tools:targetApi="31">
         <activity
+            android:name=".user.ProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".user.ConfirmActivity"
             android:exported="false">
             <meta-data
@@ -21,13 +28,6 @@
         </activity>
         <activity
             android:name=".user.UserActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".user.InfoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
