@@ -30,7 +30,7 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
     //현재위치
     private lateinit var mMap: GoogleMap
 
-    //위치값 사용
+    //현재 정보 업데이트 변수
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private lateinit var currentMarker: Marker
@@ -133,18 +133,6 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     }
 
-    //마커 활성화하며 이동
-    fun moveCamera(map: GoogleMap, marker: Marker) {
-        map.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                LatLng(
-                    marker.position.latitude,
-                    marker.position.longitude
-                ), 16f
-            )
-        )
-        marker.showInfoWindow()
-    }
 
     fun setLastLocation(lastLocation: Location) {
         val LATLNG = LatLng(lastLocation.latitude, lastLocation.longitude)  // 전달받은 위치를 좌표로 마커를 생성
@@ -176,10 +164,3 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
 
 
 }
-
-
-
-
-
-
-
