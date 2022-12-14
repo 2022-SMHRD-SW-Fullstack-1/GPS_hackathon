@@ -20,21 +20,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".auth1.LoginActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".auth.IntroActivity"
+            android:name=".auth1.IntroActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".auth.JoinActivity"
+            android:name=".auth1.JoinActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

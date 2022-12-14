@@ -15,13 +15,6 @@ import com.example.gps.utils.FBdatabase
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import android.text.Editable
-import android.util.Log
-import com.bumptech.glide.Glide
-import com.example.gps.auth.LoginActivity
-import com.example.gps.fragment.OotdFragment
-import com.example.gps.home.HomeActivity
-import kotlin.random.Random
 
 class BoardWriteActivity : AppCompatActivity() {
 

@@ -20,10 +20,14 @@ class CommentAdapter(val context: Context, val commentList: ArrayList<CommentVO>
         val tvMsg : TextView
 
 
+
         init {
 
             tvName = itemView.findViewById(R.id.tvName)
             tvMsg = itemView.findViewById(R.id.tvMsg)
+
+//            tvMsg.setText(commentList[position].msg)
+//            tvName.setText(commentList[position].name)
 
         }
 

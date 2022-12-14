@@ -93,7 +93,7 @@ class CommentFragment : Fragment() {
                 CommentList.add(commentItem)
 //                Log.d("test",commentItem.msg)
                 //어뎁터 새로고침
-                adapter.print(commentItem)
+
                 adapter.notifyDataSetChanged()
             }
 
