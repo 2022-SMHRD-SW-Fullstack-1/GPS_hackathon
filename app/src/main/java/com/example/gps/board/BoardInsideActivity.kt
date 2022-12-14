@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
+import com.example.gps.fragment.CommentFragment
 import com.example.gps.utils.FBAuth.Companion.auth
 import com.example.gps.utils.FBAuth.Companion.getUid
 import com.example.gps.utils.FBdatabase
@@ -25,7 +26,11 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 
-class BoardInsideActivity() : AppCompatActivity() {
+class BoardInsideActivity : AppCompatActivity() {
+
+    // 게시물의 uid값이 들어갈 가변 배열
+    var keyData = ArrayList<String>()
+    lateinit var ref : DatabaseReference
 
     lateinit var imgIn: ImageView
     lateinit var likeRef:DatabaseReference
@@ -74,6 +79,8 @@ class BoardInsideActivity() : AppCompatActivity() {
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
+//        Log.d("개빡치네",id)
+//        Log.d("개빡치네2",uid!!)
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
@@ -87,10 +94,11 @@ class BoardInsideActivity() : AppCompatActivity() {
 
             likeRef.push().setValue(likeCount)
 
-            } else {
-                like = false
-                imgLike.setImageResource(R.drawable.likeup)
+            }else{
+                like=false
+             imgLike.setImageResource(R.drawable.likeup)
                 cnt--
+            }
 
                 tvLikeCount.setText("좋아요 $cnt 개")
             }
@@ -109,6 +117,25 @@ class BoardInsideActivity() : AppCompatActivity() {
                 mark=false
             }
 
+
+        imgComment.setOnClickListener {
+
+            tvInContent.visibility = View.INVISIBLE
+            tvInTime.visibility = View.INVISIBLE
+            tvInTitle.visibility = View.INVISIBLE
+            imgIn.visibility = View.INVISIBLE
+            imgComment.visibility = View.INVISIBLE
+            imgLike.visibility = View.INVISIBLE
+            imgBookMark.visibility = View.INVISIBLE
+            tvLikeCount.visibility = View.INVISIBLE
+
+            supportFragmentManager.beginTransaction().replace(
+                R.id.cl,
+                CommentFragment()
+            ).commit()
+
+
+        }
 
         //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
         //받아온 이미지 key값을 넘겨주기!
@@ -144,10 +171,15 @@ class BoardInsideActivity() : AppCompatActivity() {
 
 
         btnRemove.setOnClickListener {
-            val mDatabase = FirebaseDatabase.getInstance();
-            val dataRef = mDatabase.getReference("board");
+            // RealTime Database에 필요한 객체 선언
+            val db = Firebase.database
 
-            dataRef.removeValue();
+            // 보드
+            val Content = db.getReference("board").child(k.toString())
+            Content.setValue(null)
+//            val mDatabase = FirebaseDatabase.getInstance();
+//            val dataRef = mDatabase.getReference("board");
+
             finish()
         }
 
@@ -178,9 +210,6 @@ class BoardInsideActivity() : AppCompatActivity() {
             }
         }
 
-
-    }
-    fun favoriteEvent(position : Int){
 
     }
 
