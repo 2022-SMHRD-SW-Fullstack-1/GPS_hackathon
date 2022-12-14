@@ -1,11 +1,25 @@
 package com.example.gps
 
 import android.content.Intent
+import android.os.Build
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
+
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.gps.fragment.*
+import com.example.gps.weather.WeatherVO
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.json.JSONObject
+
 import com.example.gps.chat.ChatActivity
 import com.example.gps.fragment.*
 import com.example.gps.user.IntroActivity
@@ -13,9 +27,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
+
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        val tvMap = findViewById<TextView>(R.id.tvMap)
+
+        val weatherList = ArrayList<WeatherVO>()
+
+        tvMap.setOnClickListener {
+            val intent = Intent(this@MainActivity, MapActivity::class.java)
+            startActivity(intent)
 
         val bnv = findViewById<BottomNavigationView>(R.id.bnvChat)
         val fl = findViewById<FrameLayout>(R.id.fl)
@@ -35,10 +60,13 @@ class MainActivity : AppCompatActivity() {
             RankFragment()
         ).commit()
 
+
+
         img_Chat.setOnClickListener{
             val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
         }
+
 
         bnv.setOnItemSelectedListener { item ->
             // item -> 내가 선택한 item의 정보
@@ -81,4 +109,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
 }
