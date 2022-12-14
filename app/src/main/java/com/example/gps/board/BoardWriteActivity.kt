@@ -16,7 +16,11 @@ import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.ou
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import android.text.Editable
+import android.util.Log
 import com.bumptech.glide.Glide
+import com.example.gps.auth.LoginActivity
+import com.example.gps.fragment.OotdFragment
+import com.example.gps.home.HomeActivity
 import kotlin.random.Random
 
 class BoardWriteActivity : AppCompatActivity() {
@@ -36,7 +40,7 @@ class BoardWriteActivity : AppCompatActivity() {
 
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
-        val key = intent.getStringExtra("key")
+//        val key = intent.getStringExtra("key")
 
         if(title != null) {
             etTitle.setText(title.toString())
@@ -75,7 +79,7 @@ class BoardWriteActivity : AppCompatActivity() {
             val uid = FBAuth.getUid()
             //현재 시간을 가지고 올 수 있는 캘린더
             val time = FBAuth.getTime()
-            val id = (1..1000).random()
+
 
             //setValue가 되기 전에 미리 BoardVO가 저장될 key값 설정!(uid값을 만들자)
             var key = FBdatabase.getBoardRef().push().key.toString()//uid값을 먼저 만들어줌
@@ -86,7 +90,10 @@ class BoardWriteActivity : AppCompatActivity() {
 
             //부착된 키값을 이미지에도 같이 부착!
             imgUpload(key)
-            finish()//이전페이지로 돌아가기 위해!
+
+//            val intent = Intent(this@BoardWriteActivity, ConfirmActivity::class.java)
+//            startActivity(intent)
+            finish()
 
         }
 
@@ -134,22 +141,6 @@ class BoardWriteActivity : AppCompatActivity() {
 
     }
 
-    // Image를 가져오는 함수 만들기
-    fun getImageData(key : String){
-        val storageReference = Firebase.storage.reference.child("$key.png")
 
-        storageReference.downloadUrl.addOnCompleteListener { task->
-            //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
-            if (task.isSuccessful){
-                Glide.with(this)
-                    .load(task.result)
-                    //into : imgIn에 업로드 하라는 것!
-                    .into(imgIn)
-
-            }
-        }
-
-
-    }
 
 }

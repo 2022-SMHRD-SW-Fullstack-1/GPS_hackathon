@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
+import com.example.gps.fragment.CommentFragment
 import com.example.gps.utils.FBAuth.Companion.auth
 import com.example.gps.utils.FBAuth.Companion.getUid
 import com.google.firebase.database.DatabaseReference
@@ -89,19 +90,26 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
         }
-        // 북마크 버튼
-        imgBookMark.setOnClickListener {
-            if(mark==false){
-                imgBookMark.setImageResource(R.drawable.mark_black)
-                mark=true
-            }else{
-                imgBookMark.setImageResource(R.drawable.mark_white)
-                mark=false
-            }
+
+        imgComment.setOnClickListener {
+
+            tvInContent.visibility = View.INVISIBLE
+            tvInTime.visibility = View.INVISIBLE
+            tvInTitle.visibility = View.INVISIBLE
+            imgIn.visibility = View.INVISIBLE
+            imgComment.visibility = View.INVISIBLE
+            imgLike.visibility = View.INVISIBLE
+            imgBookMark.visibility = View.INVISIBLE
+            tvLikeCount.visibility = View.INVISIBLE
+
+            supportFragmentManager.beginTransaction().replace(
+                R.id.cl,
+                CommentFragment()
+            ).commit()
+
+
         }
 
-        //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
-        //받아온 이미지 key값을 넘겨주기!
 
 
         if(id != uid){
@@ -121,7 +129,7 @@ class BoardInsideActivity : AppCompatActivity() {
             Content.setValue(null)
 
 
-            val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
+            val intent = Intent(this@BoardInsideActivity, CommentFragment::class.java)
             intent.putExtra("title",title)
             intent.putExtra("content",content)
             intent.putExtra("key",key)
@@ -134,10 +142,12 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
         btnRemove.setOnClickListener {
-            val mDatabase = FirebaseDatabase.getInstance();
-            val dataRef = mDatabase.getReference("board");
+            val db = Firebase.database
 
-            dataRef.removeValue();
+            // 보드
+            val Content = db.getReference("board").child(k.toString())
+            Content.setValue(null)
+
             finish()
         }
 
@@ -146,7 +156,7 @@ class BoardInsideActivity : AppCompatActivity() {
         }
 
 
-
+        getImageData(key.toString())
 
     }
 
@@ -170,6 +180,8 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
     }
+
+
 
 
 
