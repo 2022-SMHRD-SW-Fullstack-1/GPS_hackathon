@@ -12,30 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GPS"
         tools:targetApi="31">
-
-        <activity
-            android:name=".auth.LoginActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
-            android:name=".auth.IntroActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
-            android:name=".auth.JoinActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+        <activity android:name=".chat.ChatActivity"/>
+        <activity android:name=".chat.MessageActivity"/>
 
         <activity
             android:name=".SplashActivity"
