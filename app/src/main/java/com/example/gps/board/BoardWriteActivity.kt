@@ -10,14 +10,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.gps.R
-import com.example.gps.utils.FBAuth
-import com.example.gps.utils.FBdatabase
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import android.text.Editable
 import com.bumptech.glide.Glide
-import kotlin.random.Random
+import com.example.fullstackapplication.utils.FBAuth
+import com.example.fullstackapplication.utils.FBdatabase
 
 class BoardWriteActivity : AppCompatActivity() {
 

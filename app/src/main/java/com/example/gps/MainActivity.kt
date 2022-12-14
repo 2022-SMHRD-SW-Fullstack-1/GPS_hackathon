@@ -8,7 +8,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import com.example.gps.chat.ChatActivity
 import com.example.gps.fragment.*
+import com.example.gps.user.IntroActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +22,13 @@ class MainActivity : AppCompatActivity() {
         val imgLogout = findViewById<ImageView>(R.id.imgLogout)
         val img_Chat = findViewById<ImageView>(R.id.img_Chat)
 
+
+        imgLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,
