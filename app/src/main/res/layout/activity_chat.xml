@@ -7,38 +7,11 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
-
-    <ImageView
-        android:id="@+id/imgContent"
-        android:layout_width="240dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.388"
-        app:srcCompat="@drawable/item1" />
-
-    <ImageView
-        android:id="@+id/imgLogout"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/item2" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnvChat"
@@ -50,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:menu="@menu/item_list" />
+        app:menu="@menu/chat_menu" />
 
     <FrameLayout
         android:id="@+id/fl"
@@ -59,18 +32,18 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2">
+        app:layout_constraintTop_toBottomOf="@+id/imgChatOut">
 
     </FrameLayout>
 
     <ImageView
-        android:id="@+id/img_Chat"
+        android:id="@+id/imgChatOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgLogout"
-        app:layout_constraintEnd_toStartOf="@+id/imgLogout"
-        app:layout_constraintTop_toTopOf="@+id/imgLogout"
-        app:srcCompat="@drawable/ic_baseline_mode_comment_24" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_back_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
