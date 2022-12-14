@@ -8,22 +8,21 @@
 
     <Button
         android:id="@+id/btnUserJoin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/btnUserLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnUserLogin"
         app:layout_constraintTop_toBottomOf="@+id/btnUserLogin" />
 
     <Button
         android:id="@+id/btnUserLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:text="로그인"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/etLoginPw"
+        app:layout_constraintStart_toStartOf="@+id/etLoginPw"
         app:layout_constraintTop_toBottomOf="@+id/cbEmailSave" />
 
     <TextView
@@ -41,20 +40,32 @@
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/tvUserSearch"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="비밀번호를 잊어버리셨나요?"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/btnUserJoin"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/btnUserJoin"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnUserJoin" />-->
+
     <TextView
-        android:id="@+id/tvUserSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디/비밀번호 찾기"
+        android:layout_marginBottom="4dp"
+        android:text="ⓒ GPS. All rights reserved"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnUserJoin"
-        app:layout_constraintStart_toStartOf="@+id/btnUserJoin"
-        app:layout_constraintTop_toBottomOf="@+id/btnUserJoin" />
+        app:layout_constraintStart_toStartOf="@+id/btnUserJoin" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="88dp"
         android:fontFamily="@font/antic_didone"
         android:text="Good People Style"
         android:textColor="@color/black"
@@ -65,25 +76,30 @@
 
     <EditText
         android:id="@+id/etLoginEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="@android:color/transparent"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="144dp"
+        android:background="@drawable/box_border"
         android:ems="10"
-        android:hint="이메일"
+        android:hint="아이디"
         android:inputType="textPersonName"
+        android:paddingStart="12dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/etLoginPw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/box_border"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/etLoginEmail"
         app:layout_constraintStart_toStartOf="@+id/etLoginEmail"
         app:layout_constraintTop_toBottomOf="@+id/etLoginEmail" />
@@ -92,7 +108,10 @@
         android:id="@+id/cbEmailSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:buttonTint="#DBDBDB"
         android:text="아이디 저장"
+        android:textColorHighlight="#D8D8D8"
+        android:textColorLink="#DBDBDB"
         app:layout_constraintStart_toStartOf="@+id/etLoginPw"
         app:layout_constraintTop_toBottomOf="@+id/etLoginPw" />
 </androidx.constraintlayout.widget.ConstraintLayout>
