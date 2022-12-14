@@ -129,7 +129,7 @@ class BoardInsideActivity : AppCompatActivity() {
             Content.setValue(null)
 
 
-            val intent = Intent(this@BoardInsideActivity, CommentFragment::class.java)
+            val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
             intent.putExtra("title",title)
             intent.putExtra("content",content)
             intent.putExtra("key",key)
