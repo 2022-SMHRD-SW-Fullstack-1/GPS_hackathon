@@ -2,10 +2,13 @@ package com.example.gps
 
 import android.content.Intent
 import android.os.Build
+
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
+
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +20,12 @@ import com.example.gps.weather.WeatherVO
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
 
+import com.example.gps.chat.ChatActivity
+import com.example.gps.fragment.*
+import com.example.gps.user.IntroActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+
 class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -24,26 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //프로젝트 키 해시 가져오는 코드
-//        try {
-//            val information =
-//                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
-//            val signatures = information.signingInfo.apkContentsSigners
-//            val md = MessageDigest.getInstance("SHA")
-//            for (signature in signatures) {
-//                val md: MessageDigest
-//                md = MessageDigest.getInstance("SHA")
-//                md.update(signature.toByteArray())
-//                var hashcode = String(Base64.encode(md.digest(), 0))
-//                Log.d("hashcode", "" + hashcode)
-//            }
-//        } catch (e: Exception) {
-//            Log.d("hashcode", "에러::" + e.toString())
-//        }
 
-        val bnv = findViewById<BottomNavigationView>(R.id.bnv)
-        val fl = findViewById<FrameLayout>(R.id.fl)
-        val imgLogout = findViewById<ImageView>(R.id.imgLogout)
         val tvMap = findViewById<TextView>(R.id.tvMap)
 
         val weatherList = ArrayList<WeatherVO>()
@@ -51,13 +41,31 @@ class MainActivity : AppCompatActivity() {
         tvMap.setOnClickListener {
             val intent = Intent(this@MainActivity, MapActivity::class.java)
             startActivity(intent)
+
+        val bnv = findViewById<BottomNavigationView>(R.id.bnvChat)
+        val fl = findViewById<FrameLayout>(R.id.fl)
+        val imgLogout = findViewById<ImageView>(R.id.imgLogout)
+        val img_Chat = findViewById<ImageView>(R.id.img_Chat)
+
+
+        imgLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,
-            HomeFragment()
+            RankFragment()
         ).commit()
 
+
+
+        img_Chat.setOnClickListener{
+            val intent = Intent(this, ChatActivity::class.java)
+            startActivity(intent)
+        }
 
 
         bnv.setOnItemSelectedListener { item ->
@@ -74,13 +82,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.tap2 -> {
                     supportFragmentManager.beginTransaction().replace(
                         R.id.fl,
-                        AdviseFragment()
+                         AdviseFragment()
                     ).commit()
                 }
                 R.id.tap3 -> {
                     supportFragmentManager.beginTransaction().replace(
                         R.id.fl,
-                        HomeFragment()
+                         HomeFragment()
                     ).commit()
                 }
                 R.id.tap4 -> {

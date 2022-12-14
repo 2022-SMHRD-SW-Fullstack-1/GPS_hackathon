@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.JoinActivity">
+
+    <EditText
+        android:id="@+id/etJoinEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="이메일"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etJoinPw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinEmail"
+        app:layout_constraintStart_toStartOf="@+id/etJoinEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinEmail" />
+
+    <EditText
+        android:id="@+id/etJoinPwCk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinPw"
+        app:layout_constraintStart_toStartOf="@+id/etJoinPw"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinPw" />
+
+    <EditText
+        android:id="@+id/etJoinNick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="닉네임"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinPwCk"
+        app:layout_constraintStart_toStartOf="@+id/etJoinPwCk"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinPwCk" />
+
+    <Button
+        android:id="@+id/btnJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinNick"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/etJoinNick" />
+
+    <Button
+        android:id="@+id/btnJoinEmailCk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="중복확인"
+        app:layout_constraintStart_toEndOf="@+id/etJoinEmail"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/svJoinCk"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="약관동의"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />
+
+    <CheckBox
+        android:id="@+id/cbJoinCk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="동의"
+        app:layout_constraintStart_toStartOf="@+id/svJoinCk"
+        app:layout_constraintTop_toBottomOf="@+id/svJoinCk" />
+</androidx.constraintlayout.widget.ConstraintLayout>
