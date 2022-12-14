@@ -1,13 +1,12 @@
-package com.example.gps.home
+package com.example.gps.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gps.R
 
-
-class HomeActivity : AppCompatActivity() {
+class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_registration)
     }
 }
