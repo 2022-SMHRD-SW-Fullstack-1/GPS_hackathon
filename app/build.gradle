@@ -3,8 +3,12 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     // firebase
     id 'com.google.gms.google-services'
+    // 구글맵
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+
 }
 
 android {
@@ -19,6 +23,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //구글맵
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -34,6 +41,18 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    //View Binding
+    buildFeatures{
+        viewBinding = true
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
@@ -51,11 +70,30 @@ dependencies {
 
     // firebase의 storage사용
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.2'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    //구글맵
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.libraries.places:places:2.7.0'
+
+    //구글 장소
+    implementation 'com.google.maps.android:android-maps-utils:2.3.0'
+
+    //volley
+    implementation 'com.android.volley:volley:1.2.1'
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation files('src\\main\\jniLibs')
+
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

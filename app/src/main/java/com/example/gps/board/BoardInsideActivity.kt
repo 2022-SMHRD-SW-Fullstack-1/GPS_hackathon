@@ -9,13 +9,18 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
+
 import com.example.gps.R
 import com.example.gps.SplashActivity
+import com.example.gps.fragment.CommentFragment
 import com.example.gps.utils.FBAuth.Companion.auth
 import com.example.gps.utils.FBAuth.Companion.getUid
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.example.gps.utils.FBdatabase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -23,17 +28,18 @@ import com.google.firebase.storage.ktx.storage
 
 class BoardInsideActivity : AppCompatActivity() {
 
-
-
     // 게시물의 uid값이 들어갈 가변 배열
     var keyData = ArrayList<String>()
     lateinit var ref : DatabaseReference
 
     lateinit var imgIn: ImageView
-
+    lateinit var likeRef:DatabaseReference
+    var auth : FirebaseAuth=Firebase.auth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
+    val database = Firebase.database
+    val likeRef=database.getReference("like")
 
         //게시글 상세페이지
 
@@ -44,8 +50,14 @@ class BoardInsideActivity : AppCompatActivity() {
 
         val btnEdit = findViewById<Button>(R.id.btnEdit)
         val btnRemove = findViewById<Button>(R.id.btnRemove)
+
+
+        val tvLikeCount = findViewById<TextView>(R.id.tvLikeCount)
+        val imgLike = findViewById<ImageView>(R.id.imgLike)
+        val imgComment = findViewById<ImageView>(R.id.imgComment)
+        val imgBookMark = findViewById<ImageView>(R.id.imgBookMark)
         val id = getUid()
-//
+
         imgIn = findViewById(R.id.imgIn)
 
 
@@ -60,13 +72,70 @@ class BoardInsideActivity : AppCompatActivity() {
         val key = intent.getStringExtra("key")
         val uid = intent.getStringExtra("uid")
 
+        var like : Boolean = false
+        var mark : Boolean = false
+        var cnt : Int= 0
         tvInTitle.text = title.toString()
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
-        Log.d("개빡치네",id)
-        Log.d("개빡치네2",uid!!)
+//        Log.d("개빡치네",id)
+//        Log.d("개빡치네2",uid!!)
 
+        // 좋아요 버튼
+        imgLike.setOnClickListener {
+            var likeCount=tvLikeCount.text.toString()
+            if (like == false) {
+                like = true
+                imgLike.setImageResource(R.drawable.like)
+                cnt++
+                var a=tvLikeCount.setText("좋아요 $cnt 개")
+                Log.d("확인",a.toString())
+
+            likeRef.push().setValue(likeCount)
+
+            }else{
+                like=false
+             imgLike.setImageResource(R.drawable.likeup)
+                cnt--
+            }
+
+                tvLikeCount.setText("좋아요 $cnt 개")
+            }
+        }
+        // 북마크 버튼
+        imgBookMark.setOnClickListener {
+
+        }
+
+            if(mark==false){
+                imgBookMark.setImageResource(R.drawable.mark_black)
+                mark=true
+
+            }else{
+                imgBookMark.setImageResource(R.drawable.mark_white)
+                mark=false
+            }
+
+
+        imgComment.setOnClickListener {
+
+            tvInContent.visibility = View.INVISIBLE
+            tvInTime.visibility = View.INVISIBLE
+            tvInTitle.visibility = View.INVISIBLE
+            imgIn.visibility = View.INVISIBLE
+            imgComment.visibility = View.INVISIBLE
+            imgLike.visibility = View.INVISIBLE
+            imgBookMark.visibility = View.INVISIBLE
+            tvLikeCount.visibility = View.INVISIBLE
+
+            supportFragmentManager.beginTransaction().replace(
+                R.id.cl,
+                CommentFragment()
+            ).commit()
+
+
+        }
 
         //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
         //받아온 이미지 key값을 넘겨주기!
@@ -147,3 +216,4 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
 }
+//

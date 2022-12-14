@@ -9,12 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.R
 import com.example.gps.board.BoardAdapter
 import com.example.gps.board.BoardInsideActivity
 import com.example.gps.board.BoardVO
 import com.example.gps.board.BoardWriteActivity
-import com.example.gps.utils.FBdatabase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -80,15 +80,12 @@ class OotdFragment : Fragment() {
             }
 
         })
-
-
         //4. rvBoard에 Adapter 적용
         rvBoard.adapter = adapter
 
         //4-1. 레이아웃 매니저
         //일렬로 정렬
         rvBoard.layoutManager = LinearLayoutManager(requireContext())
-
 
         return view
     }

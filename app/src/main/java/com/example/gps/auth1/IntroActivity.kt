@@ -1,4 +1,4 @@
-package com.example.gps.auth
+package com.example.gps.auth1
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
