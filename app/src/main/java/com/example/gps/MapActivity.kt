@@ -167,7 +167,7 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 15.5f))
 
         // 현재 위치를 검색하기 위해서 FusedLocationProviderClient 사용
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
 
     }
