@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +54,8 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         val etMapSearch = findViewById<EditText>(R.id.etMapSearch)
         val btnMapSearch = findViewById<Button>(R.id.btnMapSearch)
         val rvMap = findViewById<RecyclerView>(R.id.rvMap)
+        val imgMyMap = findViewById<ImageView>(R.id.imgMyMap)
+        val tvMyMap = findViewById<TextView>(R.id.tvMyMap)
 
         //Template => list_layout.xml
 
@@ -105,6 +109,14 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         })
 
+        imgMyMap.setOnClickListener {
+            updateLocation()
+        }
+
+        tvMyMap.setOnClickListener {
+            updateLocation()
+        }
+
 //        val mapFragment = supportFragmentManager
 //            .findFragmentById(R.id.map) as SupportMapFragment
 //        val mLayout = findViewById<ConstraintLayout>(R.id.layout_main)
@@ -157,7 +169,6 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         // 현재 위치를 검색하기 위해서 FusedLocationProviderClient 사용
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        updateLocation()
 
     }
 
