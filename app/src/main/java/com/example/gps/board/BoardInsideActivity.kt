@@ -11,14 +11,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 
 import com.example.gps.R
-import com.example.gps.SplashActivity
+
 import com.example.gps.fragment.CommentFragment
-import com.example.gps.utils.FBAuth.Companion.auth
-import com.example.gps.utils.FBAuth.Companion.getUid
+
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
