@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/antic_didone</item>
+        <item>@font/dm_serif_display</item>
         <item>@font/dm_serif_display_italic</item>
     </array>
 </resources>

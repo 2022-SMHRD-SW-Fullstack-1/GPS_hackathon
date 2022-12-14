@@ -26,6 +26,10 @@ import com.google.firebase.storage.ktx.storage
 
 class BoardInsideActivity : AppCompatActivity() {
 
+    // 게시물의 uid값이 들어갈 가변 배열
+    var keyData = ArrayList<String>()
+    lateinit var ref : DatabaseReference
+
     lateinit var imgIn: ImageView
     val database = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,11 +146,14 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
         btnRemove.setOnClickListener {
+            // RealTime Database에 필요한 객체 선언
             val db = Firebase.database
 
             // 보드
             val Content = db.getReference("board").child(k.toString())
             Content.setValue(null)
+//            val mDatabase = FirebaseDatabase.getInstance();
+//            val dataRef = mDatabase.getReference("board");
 
             finish()
         }
@@ -156,7 +163,7 @@ class BoardInsideActivity : AppCompatActivity() {
         }
 
 
-        getImageData(key.toString())
+
 
     }
 
@@ -183,7 +190,4 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
 
-
-
 }
-//
