@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.R
@@ -20,11 +21,22 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import de.hdodenhof.circleimageview.CircleImageView
 
 class ClosetFragment : Fragment() {
+    override fun onResume() {
+        super.onResume()
+        changeInfo()
+        Log.d("onResume", "언제 찍히지...")
+    }
 
     lateinit var infoRef: DatabaseReference
+    lateinit var civProfile: CircleImageView
+    lateinit var tvClosetNick: TextView
     var nickname: String = ""
+    var imgUrl: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,29 +44,33 @@ class ClosetFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_closet, container, false)
 
-        val tvClosetNick = view.findViewById<TextView>(R.id.tvClosetNick)
+        tvClosetNick = view.findViewById<TextView>(R.id.tvClosetNick)
         val btnChangeProfile = view.findViewById<Button>(R.id.btnChangeProfile)
         val btnInfoChange = view.findViewById<Button>(R.id.btnInfoChange)
+        civProfile = view.findViewById(R.id.civProfile)
 
         infoRef = FBdatabase.getUserRef()
 
-        val postListener = (object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (model in snapshot.children) {
-                    val item = model.getValue<JoinVO>()
-                    if (FBAuth.getUid() == item?.uid) {
-                        nickname = item.nick
-                        Log.d("닉네임", nickname)
-                    }
-                    tvClosetNick.text = nickname+"님의 CLOSET"
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-        infoRef.addValueEventListener(postListener)
-
+//        val postListener = (object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                for (model in snapshot.children) {
+//                    val item = model.getValue<JoinVO>()
+//                    if (FBAuth.getUid() == item?.uid) {
+//                        nickname = item.nick
+//                        imgUrl = item.profileUrl
+//                        Log.d("닉네임", nickname)
+//                        Log.d("프로필주소", imgUrl)
+//                    }
+//                    getImageData(imgUrl)
+//                    tvClosetNick.text = nickname+"님의 CLOSET"
+//                    Log.d("세팅끝","언제..")
+//                }
+//            }
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+//        infoRef.addValueEventListener(postListener)
 
         btnInfoChange.setOnClickListener {
             val intent = Intent(context, UserActivity::class.java)
@@ -64,12 +80,47 @@ class ClosetFragment : Fragment() {
         btnChangeProfile.setOnClickListener {
             val intent = Intent(context, ProfileActivity::class.java)
             intent.putExtra("nick", nickname)
+            if (imgUrl.isNotEmpty()) {
+                intent.putExtra("imgUrl", imgUrl)
+            }
             startActivity(intent)
         }
-
-
 
         return view
     }
 
+    // Image를 가져오는 함수 만들기
+    fun getImageData(key : String){
+        val storageReference = Firebase.storage.reference.child("$imgUrl.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task->
+            if (task.isSuccessful){
+                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                Glide.with(this)
+                    .load(task.result)
+                    .into(civProfile) //지역변수
+            }
+        }
+    }
+
+    fun changeInfo() {
+        val postListener = (object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (model in snapshot.children) {
+                    val item = model.getValue<JoinVO>()
+                    if (FBAuth.getUid() == item?.uid) {
+                        nickname = item.nick
+                        imgUrl = item.profileUrl
+                    }
+                    getImageData(imgUrl)
+                    tvClosetNick.text = nickname+"님의 CLOSET"
+                    Log.d("??", "미스테리....")
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+        infoRef.addValueEventListener(postListener)
+    }
 }

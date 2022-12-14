@@ -10,12 +10,13 @@ import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 class JoinActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    lateinit var profileStorage: FirebaseStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +31,9 @@ class JoinActivity : AppCompatActivity() {
         val svJoinCk = findViewById<ScrollView>(R.id.svJoinCk)
         val cbJoinCk = findViewById<CheckBox>(R.id.cbJoinCk)
 
+        profileStorage = FirebaseStorage.getInstance();
         auth = Firebase.auth
         val userRef = FBdatabase.getUserRef()
-
-        val userList = ArrayList<JoinVO>()
 
         btnJoinEmailCk.setOnClickListener {
 
@@ -87,7 +87,7 @@ class JoinActivity : AppCompatActivity() {
                 Toast.makeText(this, "약관에 동의해주세요", Toast.LENGTH_SHORT).show()
             }
 
-            if (isJoin == true) {
+            if (isJoin) {
                 auth.createUserWithEmailAndPassword(email, pw)
                     // 사용자를 만드는 작업
                     // -> create가 보내고 있는 전달인자 2개(email, pw)는
@@ -113,6 +113,9 @@ class JoinActivity : AppCompatActivity() {
                             Toast.makeText(this, "회원가입 실패..", Toast.LENGTH_SHORT).show()
                         }
                     }
+
+
+
             }
         }
     }

@@ -30,12 +30,17 @@ class UserActivity : AppCompatActivity() {
         val etInfoPwCk = findViewById<EditText>(R.id.etInfoPwCk)
         val btnChangeInfo = findViewById<Button>(R.id.btnChangeInfo)
         val btnInfoDelAcc = findViewById<Button>(R.id.btnInfoDelAcc)
+        val imgUserBack = findViewById<ImageView>(R.id.imgUserBack)
 
         auth = Firebase.auth
 
         infoRef = FBdatabase.getUserRef()
 
         tvInfoEmail.text = FBAuth.getCurrentUser()?.email
+
+        imgUserBack.setOnClickListener {
+            onBackPressed()
+        }
 
         btnChangeInfo.setOnClickListener {
             val newPw = etInfoPw.text.toString()
@@ -49,6 +54,7 @@ class UserActivity : AppCompatActivity() {
                     Toast.makeText(this, "비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
                 }
             }
+            onBackPressed()
         }
 
         btnInfoDelAcc.setOnClickListener {

@@ -25,7 +25,7 @@
                 android:id="@+id/tvClosetNick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ㅇㅇ님의 CLOSET"
+                android:text="nickname님의 CLOSET"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,10 +35,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
-                android:src="@drawable/profiledog"
-                app:civ_border_color="#000000"
-                app:civ_border_overlay="true"
-                app:civ_border_width="1dp"
+                android:src="@drawable/user"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvClosetNick" />
 
@@ -106,7 +103,7 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="좋아요"
+                android:text="북마크"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView12"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
