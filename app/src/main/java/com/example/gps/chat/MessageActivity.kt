@@ -119,7 +119,7 @@ class MessageActivity : AppCompatActivity() {
                 }
                 override fun onDataChange(snapshot: DataSnapshot) {
                     friend = snapshot.getValue<Friend>()
-                    messageActivity_textView_topName.text = friend?.name
+                    messageActivity_textView_topName.text = friend?.nick
                     getMessageList()
                 }
             })
@@ -160,10 +160,10 @@ class MessageActivity : AppCompatActivity() {
                 holder.layout_main.gravity = Gravity.RIGHT
             }else{ // 상대방 채팅
                 Glide.with(holder.itemView.context)
-                    .load(friend?.profileImageUrl)
+                    .load(friend?.profileUrl)
                     .apply(RequestOptions().circleCrop())
                     .into(holder.imageView_profile)
-                holder.textView_name.text = friend?.name
+                holder.textView_name.text = friend?.nick
                 holder.layout_destination.visibility = View.VISIBLE
                 holder.textView_name.visibility = View.VISIBLE
                 holder.textView_message.setBackgroundResource(com.example.gps.R.drawable.leftbubble)

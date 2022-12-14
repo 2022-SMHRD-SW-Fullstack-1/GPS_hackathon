@@ -19,17 +19,13 @@ class ChatActivity : AppCompatActivity() {
 
         val bnvChat = findViewById<BottomNavigationView>(R.id.bnvChat)
         val fl = findViewById<FrameLayout>(R.id.fl)
-        val imgChatOut = findViewById<ImageView>(R.id.imgChatOut)
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,
             ChatFragment1()
         ).commit()
 
-        imgChatOut.setOnClickListener{
-            val intent = Intent(this@ChatActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
+
 
         bnvChat.setOnItemSelectedListener { item ->
             // item -> 내가 선택한 item의 정보

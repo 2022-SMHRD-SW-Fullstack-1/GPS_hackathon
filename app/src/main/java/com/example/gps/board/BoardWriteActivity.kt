@@ -14,6 +14,8 @@ import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.ou
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.bumptech.glide.Glide
+import com.example.fullstackapplication.utils.FBAuth
+import com.example.fullstackapplication.utils.FBdatabase
 
 
 class BoardWriteActivity : AppCompatActivity() {

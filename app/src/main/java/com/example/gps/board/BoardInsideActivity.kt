@@ -11,16 +11,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 
 import com.example.gps.R
-import com.example.gps.SplashActivity
+
 import com.example.gps.fragment.CommentFragment
-import com.example.gps.utils.FBAuth.Companion.auth
-import com.example.gps.utils.FBAuth.Companion.getUid
-import com.example.gps.utils.FBdatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+
+import com.google.firebase.database.DatabaseReference
+
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -38,8 +39,8 @@ class BoardInsideActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
-    val database = Firebase.database
-    val likeRef=database.getReference("like")
+        val database = Firebase.database
+        val likeRef=database.getReference("like")
 
         //게시글 상세페이지
 
@@ -92,31 +93,16 @@ class BoardInsideActivity : AppCompatActivity() {
                 var a=tvLikeCount.setText("좋아요 $cnt 개")
                 Log.d("확인",a.toString())
 
-            likeRef.push().setValue(likeCount)
+                likeRef.push().setValue(likeCount)
 
             }else{
                 like=false
-             imgLike.setImageResource(R.drawable.likeup)
+                imgLike.setImageResource(R.drawable.likeup)
                 cnt--
             }
 
-                tvLikeCount.setText("좋아요 $cnt 개")
-            }
-        }
-        // 북마크 버튼
-        imgBookMark.setOnClickListener {
 
         }
-
-            if(mark==false){
-                imgBookMark.setImageResource(R.drawable.mark_black)
-                mark=true
-
-            }else{
-                imgBookMark.setImageResource(R.drawable.mark_white)
-                mark=false
-            }
-
 
         imgComment.setOnClickListener {
 
@@ -143,45 +129,45 @@ class BoardInsideActivity : AppCompatActivity() {
 
         if(id != uid){
 
-                btnEdit.visibility = View.INVISIBLE
-                btnRemove.visibility = View.INVISIBLE
-            }
+            btnEdit.visibility = View.INVISIBLE
+            btnRemove.visibility = View.INVISIBLE
+        }
 
 
         if (id == uid){
-        btnEdit.setOnClickListener {
+            btnEdit.setOnClickListener {
 
-            val db = Firebase.database
+                val db = Firebase.database
 
-            // 보드
-            val Content = db.getReference("board").child(k.toString())
-            Content.setValue(null)
+                // 보드
+                val Content = db.getReference("board").child(k.toString())
+                Content.setValue(null)
 
 
-            val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
-            intent.putExtra("title",title)
-            intent.putExtra("content",content)
-            intent.putExtra("key",key)
+                val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
+                intent.putExtra("title",title)
+                intent.putExtra("content",content)
+                intent.putExtra("key",key)
 
 
 //            intent.putExtra("image",content)
-            startActivity(intent)
-        }
+                startActivity(intent)
+            }
 
 
 
-        btnRemove.setOnClickListener {
-            // RealTime Database에 필요한 객체 선언
-            val db = Firebase.database
+            btnRemove.setOnClickListener {
+                // RealTime Database에 필요한 객체 선언
+                val db = Firebase.database
 
-            // 보드
-            val Content = db.getReference("board").child(k.toString())
-            Content.setValue(null)
+                // 보드
+                val Content = db.getReference("board").child(k.toString())
+                Content.setValue(null)
 //            val mDatabase = FirebaseDatabase.getInstance();
 //            val dataRef = mDatabase.getReference("board");
 
-            finish()
-        }
+                finish()
+            }
 
 
 
@@ -216,4 +202,3 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
 }
-//

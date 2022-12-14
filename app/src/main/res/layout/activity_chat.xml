@@ -32,18 +32,8 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgChatOut">
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
-
-    <ImageView
-        android:id="@+id/imgChatOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_back_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

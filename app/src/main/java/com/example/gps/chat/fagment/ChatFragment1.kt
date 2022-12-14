@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.chat.MessageActivity
 import com.example.gps.chat.Friend
 import com.example.gps.R
@@ -22,8 +23,15 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_chat1.view.*
 
 class ChatFragment1 : Fragment() {
+
+    lateinit var infoRef: DatabaseReference
+    lateinit var imgUrl: String
+
     companion object{
         fun newInstance() : ChatFragment1 {
             return ChatFragment1()
@@ -54,6 +62,9 @@ class ChatFragment1 : Fragment() {
         database = Firebase.database.reference
         val view = inflater.inflate(R.layout.fragment_chat1, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.home_recycler)
+
+        infoRef = FBdatabase.getUserRef()
+
         //this는 액티비티에서 사용가능, 프래그먼트는 requireContext()로 context 가져오기
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = RecyclerViewAdapter()
@@ -85,16 +96,21 @@ class ChatFragment1 : Fragment() {
 
         inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imageView: ImageView = itemView.findViewById(R.id.home_item_iv)
-            val textView : TextView = itemView.findViewById(R.id.home_item_tv)
-            val textViewEmail : TextView = itemView.findViewById(R.id.home_item_email)
+            val textView : TextView = itemView.findViewById(R.id.home_item_name)
         }
 
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-            Glide.with(holder.itemView.context).load(friend[position].profileImageUrl)
-                .apply(RequestOptions().circleCrop())
-                .into(holder.imageView)
-            holder.textView.text = friend[position].name
-            holder.textViewEmail.text = friend[position].email
+
+            val storageReference = Firebase.storage.reference.child("${friend[position].profileUrl}.png")
+
+            storageReference.downloadUrl.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Glide.with(holder.itemView.context)
+                        .load(task.result).apply(RequestOptions().circleCrop())
+                        .into(holder.imageView)
+                }
+            }
+            holder.textView.text = friend[position].nick
 
             holder.itemView.setOnClickListener{
                 val intent = Intent(context, MessageActivity::class.java)
