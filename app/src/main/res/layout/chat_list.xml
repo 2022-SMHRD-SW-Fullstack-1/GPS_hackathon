@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvToday"
         android:layout_width="410dp"
         android:layout_height="1dp" />
 
