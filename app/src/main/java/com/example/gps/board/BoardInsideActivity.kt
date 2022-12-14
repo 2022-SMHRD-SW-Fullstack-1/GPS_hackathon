@@ -17,8 +17,9 @@ import com.example.gps.SplashActivity
 import com.example.gps.utils.FBAuth.Companion.auth
 import com.example.gps.utils.FBAuth.Companion.getUid
 import com.example.gps.utils.FBdatabase
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -27,10 +28,13 @@ import com.google.firebase.storage.ktx.storage
 class BoardInsideActivity() : AppCompatActivity() {
 
     lateinit var imgIn: ImageView
-    val database = Firebase.database
+    lateinit var likeRef:DatabaseReference
+    var auth : FirebaseAuth=Firebase.auth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
+    val database = Firebase.database
+    val likeRef=database.getReference("like")
 
         //게시글 상세페이지
 
@@ -70,38 +74,40 @@ class BoardInsideActivity() : AppCompatActivity() {
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
-//        Log.d("개빡치네",id)
-//        Log.d("개빡치네2",uid!!)
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-        var key= FBdatabase.getBoardRef().push().key.toString()
-            Toast.makeText(this, "좋아요...", Toast.LENGTH_SHORT).show()
-                val bookmarkRef=database.getReference("bookmarklist")
-            if(like==false){
-                like=true
-            imgLike.setImageResource(R.drawable.like)
+
+            if (like == false) {
+                like = true
+                imgLike.setImageResource(R.drawable.like)
                 cnt++
-        FBdatabase.getBoardRef().child(key).setValue(BoardVO())
+             val likeCount=tvLikeCount.setText("좋아요 $cnt 개")
 
-            }else{
-                like=false
-             imgLike.setImageResource(R.drawable.likeup)
+            likeRef.push().setValue(likeCount)
+
+            } else {
+                like = false
+                imgLike.setImageResource(R.drawable.likeup)
                 cnt--
+
+                tvLikeCount.setText("좋아요 $cnt 개")
             }
-
-
         }
         // 북마크 버튼
         imgBookMark.setOnClickListener {
+
+        }
+
             if(mark==false){
                 imgBookMark.setImageResource(R.drawable.mark_black)
                 mark=true
+
             }else{
                 imgBookMark.setImageResource(R.drawable.mark_white)
                 mark=false
             }
-        }
+
 
         //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
         //받아온 이미지 key값을 넘겨주기!
@@ -171,6 +177,9 @@ class BoardInsideActivity() : AppCompatActivity() {
             }
         }
 
+
+    }
+    fun favoriteEvent(position : Int){
 
     }
 
