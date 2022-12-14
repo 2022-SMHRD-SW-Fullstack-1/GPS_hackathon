@@ -1,10 +1,12 @@
 package com.example.gps
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.example.gps.chat.ChatActivity
 import com.example.gps.fragment.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -13,14 +15,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bnv = findViewById<BottomNavigationView>(R.id.bnv)
+        val bnv = findViewById<BottomNavigationView>(R.id.bnvChat)
         val fl = findViewById<FrameLayout>(R.id.fl)
         val imgLogout = findViewById<ImageView>(R.id.imgLogout)
+        val img_Chat = findViewById<ImageView>(R.id.img_Chat)
+
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,
-            HomeFragment()
+            RankFragment()
         ).commit()
+
+        img_Chat.setOnClickListener{
+            val intent = Intent(this, ChatActivity::class.java)
+            startActivity(intent)
+        }
 
         bnv.setOnItemSelectedListener { item ->
             // item -> 내가 선택한 item의 정보
@@ -36,13 +45,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.tap2 -> {
                     supportFragmentManager.beginTransaction().replace(
                         R.id.fl,
-                        AdviseFragment()
+                         AdviseFragment()
                     ).commit()
                 }
                 R.id.tap3 -> {
                     supportFragmentManager.beginTransaction().replace(
                         R.id.fl,
-                        HomeFragment()
+                         HomeFragment()
                     ).commit()
                 }
                 R.id.tap4 -> {
