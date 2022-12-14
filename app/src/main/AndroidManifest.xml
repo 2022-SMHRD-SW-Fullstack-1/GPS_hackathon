@@ -36,14 +36,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".location.LocationActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-
-        </activity>
 
         <!-- 구글맵 -->
         <meta-data

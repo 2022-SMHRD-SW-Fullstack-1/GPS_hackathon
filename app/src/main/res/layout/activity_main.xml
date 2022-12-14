@@ -22,7 +22,7 @@
 
     <ImageView
         android:id="@+id/imgContent"
-        android:layout_width="240dp"
+        android:layout_width="140dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,12 +66,35 @@
         android:id="@+id/tvMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="위치확인"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/imgLogout"
-        app:layout_constraintStart_toEndOf="@+id/imgContent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgWeather"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgContent"
+        app:layout_constraintEnd_toStartOf="@+id/tvMap"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imgContent"
+        app:layout_constraintTop_toTopOf="@+id/imgContent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/sunny" />
+
+    <TextView
+        android:id="@+id/tvWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="@+id/imgWeather"
+        app:layout_constraintStart_toStartOf="@+id/imgWeather"
+        app:layout_constraintTop_toBottomOf="@+id/imgWeather" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
