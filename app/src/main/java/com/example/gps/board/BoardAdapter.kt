@@ -6,12 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gps.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 //Fragment3에 있는 rvBoard에 적용될 Adapter
-class BoardAdapter(val context: Context, val boardList: ArrayList<BoardVO>):RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
+class BoardAdapter(
+    var context: Context,
+    var boardList: ArrayList<BoardVO>,
+//    var keyData: ArrayList<String>
+)
+    :RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
     //리사이클러뷰 항목을 클릭할 때 이벤트를 넣고 싶을 때 인터페이스 필요(내가 설계해야 하는 거임)
     //인터페이스
@@ -28,12 +38,15 @@ class BoardAdapter(val context: Context, val boardList: ArrayList<BoardVO>):Recy
         mOnItemClickListener = onItemClickListener
     }
 
+//    val database=Firebase.database
+//    val auth : FirebaseAuth=Firebase.auth
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         val tvRvTitle: TextView
         val tvRvContent: TextView
         val tvRvTime: TextView
+
 
         init {
             tvRvTitle = itemView.findViewById(R.id.tvRvTitle)
@@ -65,6 +78,10 @@ class BoardAdapter(val context: Context, val boardList: ArrayList<BoardVO>):Recy
         holder.tvRvTitle.text = boardList[position].title
         holder.tvRvContent.text = boardList[position].content
         holder.tvRvTime.text = boardList[position].time
+
+
+
+
 
 
     }

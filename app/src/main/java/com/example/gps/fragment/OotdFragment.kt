@@ -80,15 +80,12 @@ class OotdFragment : Fragment() {
             }
 
         })
-
-
         //4. rvBoard에 Adapter 적용
         rvBoard.adapter = adapter
 
         //4-1. 레이아웃 매니저
         //일렬로 정렬
         rvBoard.layoutManager = LinearLayoutManager(requireContext())
-
 
         return view
     }
