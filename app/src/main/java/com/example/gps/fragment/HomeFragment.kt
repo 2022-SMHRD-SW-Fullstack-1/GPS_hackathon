@@ -18,6 +18,8 @@ import org.json.JSONObject
 
 class HomeFragment : Fragment() {
 
+    private var HomeFragment: HomeFragment? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
