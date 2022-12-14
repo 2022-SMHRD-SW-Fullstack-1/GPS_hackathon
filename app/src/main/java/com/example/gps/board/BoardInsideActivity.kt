@@ -77,12 +77,13 @@ class BoardInsideActivity() : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-
+            var likeCount=tvLikeCount.text.toString()
             if (like == false) {
                 like = true
                 imgLike.setImageResource(R.drawable.like)
                 cnt++
-             val likeCount=tvLikeCount.setText("좋아요 $cnt 개")
+                var a=tvLikeCount.setText("좋아요 $cnt 개")
+                Log.d("확인",a.toString())
 
             likeRef.push().setValue(likeCount)
 
