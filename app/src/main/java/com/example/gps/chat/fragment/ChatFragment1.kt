@@ -1,4 +1,4 @@
-package com.example.gps.chat.fagment
+package com.example.gps.chat.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context

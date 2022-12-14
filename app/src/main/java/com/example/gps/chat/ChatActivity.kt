@@ -1,15 +1,12 @@
 package com.example.gps.chat
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
-import android.widget.ImageView
-import com.example.gps.MainActivity
 import com.example.gps.R
-import com.example.gps.chat.fagment.ChatFragment2
-import com.example.gps.chat.fagment.ChatFragment1
+import com.example.gps.chat.fragment.ChatFragment2
+import com.example.gps.chat.fragment.ChatFragment1
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ChatActivity : AppCompatActivity() {

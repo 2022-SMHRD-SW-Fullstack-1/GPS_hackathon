@@ -1,9 +1,8 @@
-package com.example.gps.chat.fagment
+package com.example.gps.chat.fragment
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -119,10 +117,20 @@ class ChatFragment2 : Fragment() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val friend = snapshot.getValue<Friend>()
 
-                        Glide.with(holder.itemView.context)
-                            .load("${friend?.profileUrl}.png")
-                            .apply(RequestOptions().circleCrop())
-                            .into(holder.imageView)
+                        val storageReference = Firebase.storage.reference.child("${friend?.profileUrl}.png")
+
+                        storageReference.downloadUrl.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Glide.with(holder.itemView.context)
+                                    .load(task.result).apply(RequestOptions().circleCrop())
+                                    .into(holder.imageView)
+                            }
+                        }
+
+//                        Glide.with(holder.itemView.context)
+//                            .load("${friend?.profileUrl}.png")
+//                            .apply(RequestOptions().circleCrop())
+//                            .into(holder.imageView)
                         holder.tvChatTitle.text = friend?.nick
                     }
                 })
