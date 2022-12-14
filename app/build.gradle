@@ -74,11 +74,6 @@ dependencies {
     //구글 장소
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
 
-    //카카오 맵
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation files('libs/libDaumMapAndroid.jar')
-
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

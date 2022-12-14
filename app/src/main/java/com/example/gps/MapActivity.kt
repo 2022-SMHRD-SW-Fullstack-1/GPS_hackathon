@@ -2,20 +2,12 @@ package com.example.gps
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.graphics.drawable.BitmapDrawable
 import android.location.Location
-import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -97,15 +89,6 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         // 현재 위치를 검색하기 위해서 FusedLocationProviderClient 사용
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         updateLocation()
-
-        /* 마커 아이콘 설정 */
-//        var bitmapDrawable: BitmapDrawable
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            bitmapDrawable = getDrawable(R.drawable.icon_here) as BitmapDrawable
-//        } else {
-//            bitmapDrawable = resources.getDrawable(R.drawable.icon_here) as BitmapDrawable
-//        }
-//        discriptor = BitmapDescriptorFactory.fromBitmap(bitmapDrawable.bitmap)
 
     }
 

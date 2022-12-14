@@ -216,11 +216,11 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             mapFragment = SupportMapFragment.newInstance(mapOptions)
 
             // Then we add it using a FragmentTransaction.
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.confirmation_map, mapFragment!!, MAP_FRAGMENT_TAG)
-                .commit()
-            mapFragment!!.getMapAsync(this)
+//            supportFragmentManager
+//                .beginTransaction()
+//                .add(R.id.confirmation_map, mapFragment!!, MAP_FRAGMENT_TAG)
+//                .commit()
+//            mapFragment!!.getMapAsync(this)
         } else {
             updateMap(coordinates)
         }
