@@ -74,6 +74,8 @@ class BoardInsideActivity : AppCompatActivity() {
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
+        getImageData(key.toString())
+
 //        Log.d("개빡치네",id)
 //        Log.d("개빡치네2",uid!!)
 
