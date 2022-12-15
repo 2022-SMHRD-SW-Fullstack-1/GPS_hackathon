@@ -15,10 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gps.R
-import com.example.gps.board.BoardAdapter
-import com.example.gps.board.BoardInsideActivity
-import com.example.gps.board.BoardVO
-import com.example.gps.board.MyBoardAdapter
+import com.example.gps.board.*
 import com.example.gps.user.JoinVO
 import com.example.gps.user.ProfileActivity
 import com.example.gps.user.UserActivity
@@ -38,6 +35,9 @@ class ClosetFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         changeInfo()
+        val bmCnt = arguments?.getString("bmCnt")
+        Log.d("넘어왔니?", arguments?.getString("bmCnt").toString())
+
     }
 
     lateinit var infoRef: DatabaseReference
@@ -65,6 +65,7 @@ class ClosetFragment : Fragment() {
         var tvCntBoard = view.findViewById<TextView>(R.id.tvCntBoard)
         civProfile = view.findViewById(R.id.civProfile)
         val rvMyBoard = view.findViewById<RecyclerView>(R.id.rvMyBoard)
+        val tvClosetBm = view.findViewById<TextView>(R.id.tvClosetBm)
 
         infoRef = FBdatabase.getUserRef()
         boardRef = FBdatabase.getBoardRef()
@@ -76,7 +77,7 @@ class ClosetFragment : Fragment() {
 
         rvMyBoard.layoutManager = LinearLayoutManager(context)
 
-        adapter.setOnItemClickListener(object : MyBoardAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : MyBoardAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 //BoardInsideActivity로 넘어가자~
 
@@ -93,6 +94,11 @@ class ClosetFragment : Fragment() {
             }
 
         })
+
+        tvClosetBm.setOnClickListener {
+            val intent = Intent(context, BookmarkActivity::class.java)
+            startActivity(intent)
+        }
 
         btnInfoChange.setOnClickListener {
             val intent = Intent(context, UserActivity::class.java)
@@ -151,7 +157,11 @@ class ClosetFragment : Fragment() {
                     val item = model.getValue<BoardVO>()
                     if (item != null && item.uid == FBAuth.getUid()) {
                         myBoardList.add(item)
-                        tvCntBoard.text = myBoardList.size.toString()
+                        if (myBoardList.size < 1) {
+                            tvCntBoard.text = 0.toString()
+                        } else {
+                            tvCntBoard.text = myBoardList.size.toString()
+                        }
                     }
                     keyData.add(model.key.toString())
                 }
