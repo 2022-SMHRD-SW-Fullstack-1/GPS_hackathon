@@ -21,6 +21,7 @@ import org.json.JSONObject
 import com.example.gps.chat.ChatActivity
 import com.example.gps.fragment.*
 import com.example.gps.user.IntroActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -101,10 +102,10 @@ class MainActivity : AppCompatActivity() {
                         ClosetFragment()
                     ).commit()
                 }
+            }
                 true
             }
 
         }
-
     }
 

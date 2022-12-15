@@ -1,4 +1,4 @@
-package com.example.fullstackapplication.utils
+package com.example.gps.utils
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -17,6 +17,10 @@ class FBdatabase {
 
         fun getBoardRef() : DatabaseReference{
             return database.getReference("board")
+        }
+
+        fun getBookmarkRef(): DatabaseReference{
+            return database.getReference("bookmark")
         }
     }
 }

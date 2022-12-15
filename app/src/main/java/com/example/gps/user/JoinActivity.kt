@@ -109,7 +109,7 @@ class JoinActivity : AppCompatActivity() {
                             // 성공했을 때 실행 시킬 코드
                             val uid = FBAuth.getUid()
 
-                            val userInfo = JoinVO(uid, nick, "임의의값", email)
+                            val userInfo = JoinVO(uid, nick, "defaultuserImage", email)
                             userRef.child(uid).setValue(userInfo)
 
                             Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()

@@ -80,10 +80,6 @@ class BoardAdapter(
         holder.tvRvTime.text = boardList[position].time
 
 
-
-
-
-
     }
 
     override fun getItemCount(): Int {

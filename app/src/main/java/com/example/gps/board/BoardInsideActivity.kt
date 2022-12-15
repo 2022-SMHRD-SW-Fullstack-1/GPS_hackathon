@@ -15,7 +15,6 @@ import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
-import com.example.gps.fragment.CommentFragment
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -74,6 +73,8 @@ class BoardInsideActivity : AppCompatActivity() {
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
 
+        getImageData(key.toString())
+
 //        Log.d("개빡치네",id)
 //        Log.d("개빡치네2",uid!!)
 
@@ -99,24 +100,6 @@ class BoardInsideActivity : AppCompatActivity() {
 
         }
 
-        imgComment.setOnClickListener {
-
-            tvInContent.visibility = View.INVISIBLE
-            tvInTime.visibility = View.INVISIBLE
-            tvInTitle.visibility = View.INVISIBLE
-            imgIn.visibility = View.INVISIBLE
-            imgComment.visibility = View.INVISIBLE
-            imgLike.visibility = View.INVISIBLE
-            imgBookMark.visibility = View.INVISIBLE
-            tvLikeCount.visibility = View.INVISIBLE
-
-            supportFragmentManager.beginTransaction().replace(
-                R.id.cl,
-                CommentFragment()
-            ).commit()
-
-
-        }
         //북마크 칠하기
         imgBookMark.setOnClickListener {
             if(mark==false){
