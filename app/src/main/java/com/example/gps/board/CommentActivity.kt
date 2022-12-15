@@ -42,3 +42,4 @@ class CommentActivity : AppCompatActivity() {
        // 우선은 세트로 db에 넣는 것부터 해보자
     }
 }
+//
