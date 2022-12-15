@@ -101,7 +101,7 @@ class JoinActivity : AppCompatActivity() {
                             val uid = FBAuth.getUid()
 
                             val userInfo = JoinVO(uid, nick, "임의의값")
-                            userRef.push().setValue(userInfo)
+                            userRef.child(uid).setValue(userInfo)
 
                             Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@JoinActivity, IntroActivity::class.java)

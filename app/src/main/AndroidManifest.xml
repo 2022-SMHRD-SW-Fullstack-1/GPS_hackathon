@@ -23,16 +23,14 @@
         tools:targetApi="31">
 
         <activity
-
             android:name=".MapActivity"
-            android:name=".CommentAdapter"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-       
-       <activity
+
+        <activity
             android:name=".BaseActivity"
             android:exported="false">
             <meta-data
@@ -65,14 +63,17 @@
         <activity
             android:name=".user.IntroActivity"
             android:exported="true">
-         
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".chat.ChatActivity"/>
-<activity android:name=".chat.MessageActivity"/>
+        <activity android:name=".chat.ChatActivity" />
+        <activity android:name=".chat.MessageActivity" />
         <activity
             android:name=".user.JoinActivity"
             android:exported="false">
@@ -87,11 +88,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-              <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- 구글맵 -->
@@ -100,20 +97,8 @@
             android:value="${MAPS_API_KEY}" />
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="114977754"/>
+            android:value="114977754" />
 
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".board.BoardWriteActivity"
             android:exported="true">
