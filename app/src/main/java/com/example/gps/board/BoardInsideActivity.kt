@@ -17,6 +17,12 @@ import com.example.gps.R
 
 import com.example.gps.fragment.CommentFragment
 
+
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+
+
 import com.google.firebase.database.DatabaseReference
 
 import com.google.firebase.database.ktx.database
@@ -31,10 +37,13 @@ class BoardInsideActivity : AppCompatActivity() {
     lateinit var ref : DatabaseReference
 
     lateinit var imgIn: ImageView
-    val database = Firebase.database
+    lateinit var likeRef:DatabaseReference
+    var auth : FirebaseAuth=Firebase.auth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
+        val database = Firebase.database
+        val likeRef=database.getReference("like")
 
         //게시글 상세페이지
 
@@ -79,16 +88,19 @@ class BoardInsideActivity : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-            Toast.makeText(this, "좋아요...", Toast.LENGTH_SHORT).show()
-                val bookmarkRef=database.getReference("bookmarklist")
-            if(like==false){
-                like=true
-            imgLike.setImageResource(R.drawable.like)
+            var likeCount=tvLikeCount.text.toString()
+            if (like == false) {
+                like = true
+                imgLike.setImageResource(R.drawable.like)
                 cnt++
+                var a=tvLikeCount.setText("좋아요 $cnt 개")
+                Log.d("확인",a.toString())
+
+                likeRef.push().setValue(likeCount)
 
             }else{
                 like=false
-             imgLike.setImageResource(R.drawable.likeup)
+                imgLike.setImageResource(R.drawable.likeup)
                 cnt--
             }
 
@@ -114,49 +126,51 @@ class BoardInsideActivity : AppCompatActivity() {
 
         }
 
+        //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
+        //받아온 이미지 key값을 넘겨주기!
 
 
         if(id != uid){
 
-                btnEdit.visibility = View.INVISIBLE
-                btnRemove.visibility = View.INVISIBLE
-            }
+            btnEdit.visibility = View.INVISIBLE
+            btnRemove.visibility = View.INVISIBLE
+        }
 
 
         if (id == uid){
-        btnEdit.setOnClickListener {
+            btnEdit.setOnClickListener {
 
-            val db = Firebase.database
+                val db = Firebase.database
 
-            // 보드
-            val Content = db.getReference("board").child(k.toString())
-            Content.setValue(null)
+                // 보드
+                val Content = db.getReference("board").child(k.toString())
+                Content.setValue(null)
 
 
-            val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
-            intent.putExtra("title",title)
-            intent.putExtra("content",content)
-            intent.putExtra("key",key)
+                val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
+                intent.putExtra("title",title)
+                intent.putExtra("content",content)
+                intent.putExtra("key",key)
 
 
 //            intent.putExtra("image",content)
-            startActivity(intent)
-        }
+                startActivity(intent)
+            }
 
 
 
-        btnRemove.setOnClickListener {
-            // RealTime Database에 필요한 객체 선언
-            val db = Firebase.database
+            btnRemove.setOnClickListener {
+                // RealTime Database에 필요한 객체 선언
+                val db = Firebase.database
 
-            // 보드
-            val Content = db.getReference("board").child(k.toString())
-            Content.setValue(null)
+                // 보드
+                val Content = db.getReference("board").child(k.toString())
+                Content.setValue(null)
 //            val mDatabase = FirebaseDatabase.getInstance();
 //            val dataRef = mDatabase.getReference("board");
 
-            finish()
-        }
+                finish()
+            }
 
 
 
