@@ -97,12 +97,6 @@ class BoardInsideActivity : AppCompatActivity() {
 
         }
 
-        imgComment.setOnClickListener {
-
-
-
-
-        }
         //북마크 칠하기
         imgBookMark.setOnClickListener {
             if(mark==false){

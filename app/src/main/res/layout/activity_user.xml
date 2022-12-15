@@ -10,8 +10,11 @@
         android:id="@+id/etInfoPwCk"
         android:layout_width="240dp"
         android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/box_border"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
+        android:paddingLeft="8dp"
         app:layout_constraintStart_toStartOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -19,36 +22,39 @@
         android:id="@+id/tvInfoEmail"
         android:layout_width="240dp"
         android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/box_border"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
         android:text="이메일"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <EditText
         android:id="@+id/etInfoPw"
         android:layout_width="240dp"
         android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/box_border"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
+        android:paddingLeft="8dp"
         app:layout_constraintStart_toStartOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <Button
         android:id="@+id/btnChangeInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_radius_main"
         android:text="확인"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/etInfoPwCk"
         app:layout_constraintStart_toStartOf="@+id/etInfoPwCk"
         app:layout_constraintTop_toBottomOf="@+id/etInfoPwCk" />
-
-    <Button
-        android:id="@+id/btnInfoDelAcc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원탈퇴"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -92,14 +98,16 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:text="이메일"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvInfoEmail"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="변경 할 비밀번호"
         app:layout_constraintStart_toStartOf="@+id/tvInfoEmail"
         app:layout_constraintTop_toBottomOf="@+id/tvInfoEmail" />
@@ -108,8 +116,19 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호 재확인"
+        android:layout_marginTop="16dp"
+        android:text="비밀번호 확인"
         app:layout_constraintStart_toStartOf="@+id/etInfoPw"
         app:layout_constraintTop_toBottomOf="@+id/etInfoPw" />
+
+    <TextView
+        android:id="@+id/btnInfoDelAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Delete Account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

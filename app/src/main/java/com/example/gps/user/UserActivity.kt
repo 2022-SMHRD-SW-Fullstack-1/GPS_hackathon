@@ -29,7 +29,7 @@ class UserActivity : AppCompatActivity() {
         val etInfoPw = findViewById<EditText>(R.id.etInfoPw)
         val etInfoPwCk = findViewById<EditText>(R.id.etInfoPwCk)
         val btnChangeInfo = findViewById<Button>(R.id.btnChangeInfo)
-        val btnInfoDelAcc = findViewById<Button>(R.id.btnInfoDelAcc)
+        val btnInfoDelAcc = findViewById<TextView>(R.id.btnInfoDelAcc)
         val imgUserBack = findViewById<ImageView>(R.id.imgUserBack)
 
         auth = Firebase.auth
@@ -81,11 +81,10 @@ class UserActivity : AppCompatActivity() {
         val postListener = (object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (model in snapshot.children) {
-                    val item = model.getValue<JoinVO>()
-                    val itemKey = model.key
-                    if (FBAuth.getUid() == item?.uid) {
-                        if (itemKey != null) {
-                            infoRef.child(itemKey).removeValue()
+                    val key = model.key
+                    if (FBAuth.getUid() == key) {
+                        if (key != null) {
+                            infoRef.child(key).removeValue()
                         }
                     }
                 }
@@ -100,7 +99,7 @@ class UserActivity : AppCompatActivity() {
         FBAuth.getCurrentUser()!!.delete().addOnCompleteListener { task ->
             if (task.isSuccessful) {
 
-                Toast.makeText(this, "아이디 삭제가 완료되었습니다", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "회원탈퇴가 완료되었습니다", Toast.LENGTH_LONG).show()
 
                 //로그아웃처리
                 FirebaseAuth.getInstance().signOut()
