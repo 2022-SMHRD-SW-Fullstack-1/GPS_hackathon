@@ -10,7 +10,10 @@
         android:id="@+id/btnUserJoin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/button_radius_main"
         android:text="회원가입"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnUserLogin"
         app:layout_constraintStart_toStartOf="@+id/btnUserLogin"
         app:layout_constraintTop_toBottomOf="@+id/btnUserLogin" />
@@ -20,7 +23,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button_radius_main"
         android:text="로그인"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/etLoginPw"
         app:layout_constraintStart_toStartOf="@+id/etLoginPw"
         app:layout_constraintTop_toBottomOf="@+id/cbEmailSave" />
@@ -40,16 +45,16 @@
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <TextView
-        android:id="@+id/tvUserSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="비밀번호를 잊어버리셨나요?"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/btnUserJoin"
-        app:layout_constraintStart_toStartOf="@+id/btnUserJoin"
-        app:layout_constraintTop_toBottomOf="@+id/btnUserJoin" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvUserSearch"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        android:text="비밀번호를 잊어버리셨나요?"-->
+    <!--        android:textSize="12sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/btnUserJoin"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/btnUserJoin"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/btnUserJoin" />-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,8 +63,8 @@
         android:text="ⓒ GPS. All rights reserved"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvUserSearch"
-        app:layout_constraintStart_toStartOf="@+id/tvUserSearch" />
+        app:layout_constraintEnd_toEndOf="@+id/btnUserJoin"
+        app:layout_constraintStart_toStartOf="@+id/btnUserJoin" />
 
     <TextView
         android:id="@+id/textView3"

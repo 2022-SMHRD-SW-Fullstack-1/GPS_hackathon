@@ -21,6 +21,7 @@ import org.json.JSONObject
 import com.example.gps.chat.ChatActivity
 import com.example.gps.fragment.*
 import com.example.gps.user.IntroActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -51,9 +52,6 @@ class MainActivity : AppCompatActivity() {
             HomeFragment()
         ).commit()
 
-        val weatherList = ArrayList<WeatherVO>()
-
-
         img_Chat.setOnClickListener {
             val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
@@ -62,11 +60,11 @@ class MainActivity : AppCompatActivity() {
 
 
         imgLogout.setOnClickListener {
-                FirebaseAuth.getInstance().signOut()
-                val intent = Intent(this, IntroActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         bnv.setOnItemSelectedListener { item ->
@@ -104,10 +102,10 @@ class MainActivity : AppCompatActivity() {
                         ClosetFragment()
                     ).commit()
                 }
+            }
                 true
             }
 
+        }
     }
- 
-}
 
