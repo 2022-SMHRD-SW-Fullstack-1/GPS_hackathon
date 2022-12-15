@@ -18,12 +18,17 @@ import com.example.gps.R
 import com.example.gps.fragment.CommentFragment
 
 
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 
 
 import com.google.firebase.database.DatabaseReference
+
 
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -37,16 +42,18 @@ class BoardInsideActivity : AppCompatActivity() {
     lateinit var ref : DatabaseReference
 
     lateinit var imgIn: ImageView
-    lateinit var likeRef:DatabaseReference
-    var auth : FirebaseAuth=Firebase.auth
+    val database = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_inside)
+
+
         val database = Firebase.database
         val likeRef=database.getReference("like")
 
-        //게시글 상세페이지
 
+        //게시글 상세페이지
+        val likeRef=database.getReference("like")
         //id값
         val tvInTitle = findViewById<TextView>(R.id.tvInTitle)
         val tvInTime = findViewById<TextView>(R.id.tvInTime)
@@ -88,24 +95,39 @@ class BoardInsideActivity : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-            var likeCount=tvLikeCount.text.toString()
-            if (like == false) {
-                like = true
+        var likeCount=tvLikeCount.text.toString()
+            if(like==false){
+                like=true
                 imgLike.setImageResource(R.drawable.like)
                 cnt++
+
+                tvLikeCount.setText("좋아요 $cnt 개")
+                likeRef.push().setValue(likeCount)
+
                 var a=tvLikeCount.setText("좋아요 $cnt 개")
                 Log.d("확인",a.toString())
 
                 likeRef.push().setValue(likeCount)
 
+
             }else{
                 like=false
                 imgLike.setImageResource(R.drawable.likeup)
                 cnt--
+
+                tvLikeCount.setText("좋아요 $cnt 개")
+                likeRef.removeValue()
             }
 
 
         }
+
+
+            }
+
+
+        }
+
 
         imgComment.setOnClickListener {
 
@@ -125,9 +147,19 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
         }
+        //북마크 칠하기
+        imgBookMark.setOnClickListener {
+            if(mark==false){
+                mark=true
+                imgBookMark.setImageResource(R.drawable.mark_black)
 
-        //이미지 가져오기(게시물의 uid 값으로 이름을 지정했음)
-        //받아온 이미지 key값을 넘겨주기!
+            }else{
+                mark=false
+                imgBookMark.setImageResource(R.drawable.mark_white)
+
+
+            }
+        }
 
 
         if(id != uid){
