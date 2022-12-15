@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/messageItem_linearlayout_main"
+    android:id="@+id/layout_chat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="410dp"
+        android:layout_height="1dp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+
         <LinearLayout
-            android:id="@+id/messageItem_layout_destination"
+            android:id="@+id/layout_destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/messageItem_imageview_profile"
+                android:id="@+id/imgChat"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -29,8 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
-                android:id="@+id/messageItem_textview_name"
+                android:id="@+id/tvChatName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이름"
@@ -38,19 +47,20 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/messageItem_textView_message"
+                android:id="@+id/tvChatMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="8dp"
                 android:text="메세지"
                 android:textColor="#000000" />
+
             <TextView
-                android:id="@+id/messageItem_textView_time"
+                android:id="@+id/tvChatTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="시간"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
