@@ -12,10 +12,11 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
+import com.example.fullstackapplication.utils.FBdatabase
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
-import com.example.gps.fragment.CommentFragment
+//import com.example.gps.fragment.CommentFragment
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -55,7 +56,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         imgIn = findViewById(R.id.imgIn)
 
-
+        var nick = FBdatabase.getUserRef().push().key.toString()//uid값을 먼저 만들어줌
 
         //해당 게시물의 상세내용을 가져와서 set해주자!
         val title = intent.getStringExtra("title")
@@ -66,6 +67,7 @@ class BoardInsideActivity : AppCompatActivity() {
         //이미지를 Firebase에서 꺼내올 때 사용할 거임
         val key = intent.getStringExtra("key")
         val uid = intent.getStringExtra("uid")
+
 
         var like : Boolean = false
         var mark : Boolean = false
@@ -85,7 +87,8 @@ class BoardInsideActivity : AppCompatActivity() {
                 imgLike.setImageResource(R.drawable.like)
                 cnt++
                 tvLikeCount.setText("좋아요 $cnt 개")
-                likeRef.push().setValue(likeCount)
+
+                likeRef.push().setValue("좋아요 $cnt 개")
             }else{
                 like=false
                 imgLike.setImageResource(R.drawable.likeup)
@@ -99,19 +102,15 @@ class BoardInsideActivity : AppCompatActivity() {
 
         imgComment.setOnClickListener {
 
-            tvInContent.visibility = View.INVISIBLE
-            tvInTime.visibility = View.INVISIBLE
-            tvInTitle.visibility = View.INVISIBLE
-            imgIn.visibility = View.INVISIBLE
-            imgComment.visibility = View.INVISIBLE
-            imgLike.visibility = View.INVISIBLE
-            imgBookMark.visibility = View.INVISIBLE
-            tvLikeCount.visibility = View.INVISIBLE
+            intent = Intent(this,CommentActivity::class.java)
 
-            supportFragmentManager.beginTransaction().replace(
-                R.id.cl,
-                CommentFragment()
-            ).commit()
+            intent.putExtra("key",k)
+            intent.putExtra("nick",nick)
+
+
+            startActivity(intent)
+
+
 
 
         }
