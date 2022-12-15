@@ -60,16 +60,16 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
             android:background="@drawable/button_radius_main"
             android:text="주변탐색"
             android:textColor="#FFFFFF"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

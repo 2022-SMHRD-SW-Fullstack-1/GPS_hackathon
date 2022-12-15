@@ -15,6 +15,7 @@ import com.example.gps.fragment.*
 import com.example.gps.weather.WeatherVO
 
 import com.example.gps.chat.ChatActivity
+import com.example.gps.map.MapActivity
 import com.example.gps.user.IntroActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -34,10 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         val weatherList = ArrayList<WeatherVO>()
 
-//        tvMap.setOnClickListener {
-//            val intent = Intent(this@MainActivity, MapActivity::class.java)
-//            startActivity(intent)
-//        }
+        tvMap.setOnClickListener {
+            val intent = Intent(this@MainActivity, MapActivity::class.java)
+            startActivity(intent)
+        }
 
 
         supportFragmentManager.beginTransaction().replace(
