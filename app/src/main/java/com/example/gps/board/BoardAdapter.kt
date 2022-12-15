@@ -86,4 +86,4 @@ class BoardAdapter(
         return boardList.size //항목의 개수
     }
 
-}
+}//
