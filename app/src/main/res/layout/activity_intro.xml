@@ -10,7 +10,10 @@
         android:id="@+id/btnUserJoin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/button_radius_main"
         android:text="회원가입"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnUserLogin"
         app:layout_constraintStart_toStartOf="@+id/btnUserLogin"
         app:layout_constraintTop_toBottomOf="@+id/btnUserLogin" />
@@ -20,7 +23,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button_radius_main"
         android:text="로그인"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/etLoginPw"
         app:layout_constraintStart_toStartOf="@+id/etLoginPw"
         app:layout_constraintTop_toBottomOf="@+id/cbEmailSave" />

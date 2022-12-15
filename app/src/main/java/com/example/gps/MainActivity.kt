@@ -11,13 +11,11 @@ import android.widget.ImageView
 
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.gps.fragment.*
 import com.example.gps.weather.WeatherVO
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
 
 import com.example.gps.chat.ChatActivity
@@ -41,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         tvMap.setOnClickListener {
             val intent = Intent(this@MainActivity, MapActivity::class.java)
             startActivity(intent)
+        }
 
         val bnv = findViewById<BottomNavigationView>(R.id.bnvChat)
         val fl = findViewById<FrameLayout>(R.id.fl)
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        img_Chat.setOnClickListener{
+        img_Chat.setOnClickListener {
             val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
         }
@@ -82,13 +81,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.tap2 -> {
                     supportFragmentManager.beginTransaction().replace(
                         R.id.fl,
-                         AdviseFragment()
+                        AdviseFragment()
                     ).commit()
                 }
                 R.id.tap3 -> {
                     supportFragmentManager.beginTransaction().replace(
                         R.id.fl,
-                         HomeFragment()
+                        HomeFragment()
                     ).commit()
                 }
                 R.id.tap4 -> {
@@ -109,6 +108,5 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 
 }
