@@ -43,7 +43,7 @@ class MessageActivity : AppCompatActivity() {
         setContentView(com.example.gps.R.layout.activity_message)
         val imageView = findViewById<ImageView>(com.example.gps.R.id.messageActivity_ImageView)
         val editText = findViewById<TextView>(com.example.gps.R.id.messageActivity_editText)
-        val imgChatRoomOut = findViewById<ImageView>(com.example.gps.R.id.imgChatRoomOut)
+        val imgChatRoomOut = findViewById<ImageView>(com.example.gps.R.id.imgMessageRoomOut)
 
         //메세지를 보낸 시간
         val time = System.currentTimeMillis()
@@ -120,7 +120,7 @@ class MessageActivity : AppCompatActivity() {
                 }
                 override fun onDataChange(snapshot: DataSnapshot) {
                     friend = snapshot.getValue<Friend>()
-                    messageActivity_textView_topName.text = friend?.nick
+                    messagetActivity_textView_topName.text = friend?.nick
                     getMessageList()
                 }
             })

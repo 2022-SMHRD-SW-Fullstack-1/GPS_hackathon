@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.MainActivity
 import com.example.gps.chat.MessageActivity
 import com.example.gps.chat.Friend
 import com.example.gps.R
+import com.example.gps.utils.FBdatabase
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database

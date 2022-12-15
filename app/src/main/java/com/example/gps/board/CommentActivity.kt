@@ -1,81 +1,91 @@
 package com.example.gps.board
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.gps.databinding.ActivityCommentBinding
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.gps.R
+import com.example.gps.utils.FBdatabase.Companion.database
+import com.example.gps.utils.FBdatabase.Companion.getBoardRef
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.activity_comment.imgCommentRoomOut
+import kotlinx.android.synthetic.main.activity_message.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CommentActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityCommentBinding
-    lateinit var adapter: CommentAdapter
-    val cmtList = ArrayList<CommentVO>()
+    private var recyclerView : RecyclerView? = null
+    lateinit var nick : String
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCommentBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_comment)
 
-        getImageData(intent.getStringExtra("profileUid").toString(), binding.imgCmtProfile)
-        binding.tvCmtNick.setText(intent.getStringExtra("nick"))
-        binding.tvCmtContent.setText(intent.getStringExtra("content"))
-        binding.tvCmtTime.setText(intent.getStringExtra("time"))
+        val key = intent.getStringExtra("key")
+        val imageView = findViewById<ImageView>(R.id.commentActivity_ImageView)
+        val editText = findViewById<TextView>(R.id.commentActivity_editText)
+        val imgChatRoomOut = findViewById<ImageView>(R.id.imgCommentRoomOut)
 
-        // getCmt()를 호출해서 cmtList가져오기
-        getCommentData(intent.getStringExtra("boardKey").toString())
+        val userRef=database.getReference("users")
 
-        adapter = CommentAdapter(this, cmtList)
-        binding.rvCmt.adapter = adapter
-        binding.rvCmt.layoutManager = LinearLayoutManager(this)
+        val uid = intent.getStringExtra("uid")
+//        val uid = Firebase.auth.currentUser?.uid.toString()
+//        Log.d("현재",uid)
+        val key2 =getBoardRef()
+        Log.d("게시물 번호?",key2.toString())
 
-        binding.btnCmtSend.setOnClickListener {
-            // database에 저장
-            val boardKey = intent.getStringExtra("boardKey").toString()
-//            var key = FBdatabase.getCommentRef(boardKey).push().key.toString()
-//            FBdatabase.getCommentRef(boardKey).child(key).setValue(CommentVO(binding.etCmt.text.toString(), FBAuth.getUid(), FBAuth.getTime()))
-            binding.etCmt.setText("")
+        val time = System.currentTimeMillis()
+        val dateFormat = SimpleDateFormat("MM월dd일 hh:mm")
+        val curTime = dateFormat.format(Date(time)).toString()
+        // 메세지를 보낸 시간
+
+        recyclerView = findViewById<RecyclerView>(R.id.commentActivity_recyclerview)
+
+
+        imgChatRoomOut.setOnClickListener{
+            finish()
         }
-    }
 
-    fun getCommentData(key: String) {
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                cmtList.clear()
-                // firebase에서 snapshot으로 데이터를 받아온 경우
-                for (model in snapshot.children) {
-                    val item = model.getValue(CommentVO::class.java) as CommentVO
-                    cmtList.add(item)
-                    Log.d("comment", item.toString())
-//                    keyData.add(model.key.toString())
+        imageView.setOnClickListener {
+            // 댓글 내용 받기
+            val com = commentActivity_editText.text.toString()
+            Log.d("댓글 내용",com)
+
+            // 닉네임 받기
+            val coma = uid!!
+
+
+
+            val nick2 = userRef.child(coma).addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+//                    Log.d("값 뽑아오기",snapshot.child("nick").value.toString())
+                    nick = snapshot.child("nick").value.toString()
+                    Log.d("닉네임",nick)
                 }
-                adapter.notifyDataSetChanged()
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                // 오류가 발생했을 때 실행되는 함수
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+
+
+
+
+
         }
-//        FBdatabase.getCommentRef(key).addValueEventListener(postListener)
-    }
 
-    fun getImageData(uid: String, view: ImageView) {
-        val storageReference = Firebase.storage.reference.child("$uid.png")
 
-        storageReference.downloadUrl.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Glide.with(this)
-                    .load(task.result)
-                    .into(view)
-
-            }
-        }
     }
 }

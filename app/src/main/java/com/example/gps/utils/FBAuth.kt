@@ -1,4 +1,4 @@
-package com.example.fullstackapplication.utils
+package com.example.gps.utils
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

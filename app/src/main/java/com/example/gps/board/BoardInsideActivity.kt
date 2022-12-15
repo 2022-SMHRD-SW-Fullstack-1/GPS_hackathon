@@ -11,10 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
+import com.example.gps.utils.FBAuth.Companion.getUid
 
 
 import com.google.firebase.database.DatabaseReference
@@ -62,7 +62,7 @@ class BoardInsideActivity : AppCompatActivity() {
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
         val time = intent.getStringExtra("time")
-        val k = intent.getStringExtra("key")
+
 
         //이미지를 Firebase에서 꺼내올 때 사용할 거임
         val key = intent.getStringExtra("key")
@@ -116,6 +116,9 @@ class BoardInsideActivity : AppCompatActivity() {
 
         imgComment.setOnClickListener{
             val intent = Intent(this@BoardInsideActivity, CommentActivity::class.java)
+            intent.putExtra("key",key)
+            intent.putExtra("uid",uid)
+
             startActivity(intent)
         }
 
@@ -133,7 +136,7 @@ class BoardInsideActivity : AppCompatActivity() {
                 val db = Firebase.database
 
                 // 보드
-                val Content = db.getReference("board").child(k.toString())
+                val Content = db.getReference("board").child(key.toString())
                 Content.setValue(null)
 
 
@@ -154,21 +157,14 @@ class BoardInsideActivity : AppCompatActivity() {
                 val db = Firebase.database
 
                 // 보드
-                val Content = db.getReference("board").child(k.toString())
+                val Content = db.getReference("board").child(key.toString())
                 Content.setValue(null)
 //            val mDatabase = FirebaseDatabase.getInstance();
 //            val dataRef = mDatabase.getReference("board");
 
                 finish()
             }
-
-
-
         }
-
-
-
-
     }
 
 

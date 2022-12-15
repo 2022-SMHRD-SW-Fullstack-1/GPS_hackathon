@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.R
 import com.example.gps.user.JoinVO
 import com.example.gps.user.ProfileActivity
 import com.example.gps.user.UserActivity
+import com.example.gps.utils.FBAuth
+import com.example.gps.utils.FBdatabase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
