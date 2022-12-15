@@ -69,34 +69,26 @@
                 android:value="" />
         </activity>
         <activity android:name=".chat.ChatActivity"/>
-
-
-        <activity android:name=".chat.MessageActivity"/>
-
-
+<activity android:name=".chat.MessageActivity"/>
         <activity
             android:name=".user.JoinActivity"
-            android:exported="true">
-
-
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
 
-            <intent-filter>
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-
         </activity>
 
         <!-- 구글맵 -->

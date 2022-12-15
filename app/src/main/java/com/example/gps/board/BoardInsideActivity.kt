@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 
 import com.example.gps.R
-
+import com.example.gps.SplashActivity
 
 
 import com.google.firebase.database.DatabaseReference
@@ -76,7 +76,6 @@ class BoardInsideActivity : AppCompatActivity() {
 
 //        Log.d("개빡치네",id)
 //        Log.d("개빡치네2",uid!!)
-        getImageData(key.toString())
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
