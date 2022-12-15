@@ -29,7 +29,6 @@ class ClosetFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         changeInfo()
-        Log.d("onResume", "언제 찍히지...")
     }
 
     lateinit var infoRef: DatabaseReference
@@ -50,27 +49,6 @@ class ClosetFragment : Fragment() {
         civProfile = view.findViewById(R.id.civProfile)
 
         infoRef = FBdatabase.getUserRef()
-
-//        val postListener = (object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                for (model in snapshot.children) {
-//                    val item = model.getValue<JoinVO>()
-//                    if (FBAuth.getUid() == item?.uid) {
-//                        nickname = item.nick
-//                        imgUrl = item.profileUrl
-//                        Log.d("닉네임", nickname)
-//                        Log.d("프로필주소", imgUrl)
-//                    }
-//                    getImageData(imgUrl)
-//                    tvClosetNick.text = nickname+"님의 CLOSET"
-//                    Log.d("세팅끝","언제..")
-//                }
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//        infoRef.addValueEventListener(postListener)
 
         btnInfoChange.setOnClickListener {
             val intent = Intent(context, UserActivity::class.java)
