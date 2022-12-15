@@ -79,7 +79,9 @@ class BoardInsideActivity : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-            var likeCount=tvLikeCount.text.toString()
+
+        var likeCount=tvLikeCount.text.toString()
+        
             if(like==false){
                 like=true
                 imgLike.setImageResource(R.drawable.like)
