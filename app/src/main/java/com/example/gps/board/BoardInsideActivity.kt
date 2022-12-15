@@ -30,6 +30,7 @@ class BoardInsideActivity : AppCompatActivity() {
     var keyData = ArrayList<String>()
     lateinit var ref : DatabaseReference
 
+
     lateinit var imgIn: ImageView
     val database = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -194,3 +195,4 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
 }
+//
