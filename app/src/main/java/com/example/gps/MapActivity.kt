@@ -6,8 +6,18 @@ import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.gps.map.MapAdapter
+import com.example.gps.map.MapVO
+import com.example.gps.map.RoadVO
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -31,6 +41,7 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
 
     private lateinit var locationCallback: LocationCallback  // 위치값 요청에 대한 갱신 정보를 받기 위해
 
+    val roadList = ArrayList<RoadVO>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,15 +51,84 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
 
         requirePermissions(permission, 999)
 
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        val mLayout = findViewById<ConstraintLayout>(R.id.layout_main)
+        val etMapSearch = findViewById<EditText>(R.id.etMapSearch)
+        val btnMapSearch = findViewById<Button>(R.id.btnMapSearch)
+        val rvMap = findViewById<RecyclerView>(R.id.rvMap)
+        val imgMyMap = findViewById<ImageView>(R.id.imgMyMap)
+        val tvMyMap = findViewById<TextView>(R.id.tvMyMap)
+
+        //Template => list_layout.xml
+
+
+        val mapList = ArrayList<MapVO>()
+        mapList.add(MapVO("광주 탑텐", "광주광역시 동구 충장로 87", "광주광역시 동구 충장로2가 8-3"))
+        mapList.add(MapVO("광주 탑텐", "광주광역시 서구 죽봉대로 61", "광주광역시 서구 화정동 12-13"))
+        mapList.add(MapVO("광주 탑텐", "광주광역시 북구 연양로 2-1", "광주광역시 북구 연제동 496-2"))
+        mapList.add(MapVO("광주 탑텐", "광주광역시 동구 중앙로 163", "광주광역시 동구 충장로4가 29-2"))
+        mapList.add(MapVO("광주 탑텐", "광주광역시 남구 서문대로 746", "광주광역시 남구 주월동 1244-7"))
+        mapList.add(MapVO("광주 탑텐", "광주광역시 광산구 장신로 98 2층", "광주광역시 광산구 장덕동 1678 2층"))
+
+        val adapter = MapAdapter(this@MapActivity, mapList)
+
+        btnMapSearch.setOnClickListener {
+            rvMap.adapter = adapter
+            rvMap.layoutManager = LinearLayoutManager(this)
+        }
+
+
+        //검색한 장소 위치
+        roadList.add(RoadVO(35.148304634523534, 126.91685703775207))
+        roadList.add(RoadVO(35.15881942467587, 126.88206477422064))
+        roadList.add(RoadVO(35.205647328179104, 126.86705354437646 ))
+        roadList.add(RoadVO(35.148701031870175, 126.91335311862461))
+        roadList.add(RoadVO(35.125932310866716, 126.89845372996768))
+        roadList.add(RoadVO(35.19030067229035, 126.82073285851655))
+
+        var road: String
+
+        adapter.setOnItemClickListener(object : MapAdapter.OnItemClickListener{
+            override fun onItemClick(View: View, position: Int) {
+                mMap.clear()
+
+                road = mapList[position].road
+
+                val search = LatLng(roadList[position].latitude, roadList[position].longitude)
+                val markerOptions = MarkerOptions()
+                //MarkerOptions: 마커가 표시될 위치(position), 마커에 표시될 타이틀(title), 마커 클릭시 보여주는 간단한 설명(snippet)
+                markerOptions.position(search)
+                markerOptions.title("광주 탑텐")
+                markerOptions.snippet("옷 가게")
+                //addMarker 메소드로 GoogleMap 객체에 추가해주면 지도에 표시
+                mMap.addMarker(markerOptions)
+
+                //moveCamera 메소드를 사용하여 카메라를 지정한 경도, 위도로 이동
+                //1 단계로 지정하면 세계지도 수준으로 보이고 숫자가 커질수록 상세지도
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(search, 15.5f))
+
+            }
+
+        })
+
+        imgMyMap.setOnClickListener {
+            updateLocation()
+        }
+
+        tvMyMap.setOnClickListener {
+            updateLocation()
+        }
+
+//        val mapFragment = supportFragmentManager
+//            .findFragmentById(R.id.map) as SupportMapFragment
+//        val mLayout = findViewById<ConstraintLayout>(R.id.layout_main)
 
         //마지막 위치 기억
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+
         //getMapAsync() 메소드를 호출하여 GoogleMap 객체가 준비될 때 실행될 콜백을 등록
 //        mapFragment.getMapAsync(this)
+
+
 
     }//onCreate 닫힘
 
@@ -87,8 +167,8 @@ internal class MapActivity : BaseActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 15.5f))
 
         // 현재 위치를 검색하기 위해서 FusedLocationProviderClient 사용
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        updateLocation()
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
 
     }
 

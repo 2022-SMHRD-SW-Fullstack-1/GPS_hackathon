@@ -27,7 +27,7 @@ class IntroActivity : AppCompatActivity() {
         val etLoginPw = findViewById<EditText>(R.id.etLoginPw)
         val btnUserLogin = findViewById<Button>(R.id.btnUserLogin)
         val btnUserJoin = findViewById<Button>(R.id.btnUserJoin)
-        val tvUserSearch = findViewById<TextView>(R.id.tvUserSearch)
+//        val tvUserSearch = findViewById<TextView>(R.id.tvUserSearch)
         val cbEmailSave = findViewById<CheckBox>(R.id.cbEmailSave)
 
         val sharedPreferences = getSharedPreferences("saveLogin", Context.MODE_PRIVATE)
@@ -43,9 +43,9 @@ class IntroActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        tvUserSearch.setOnClickListener {
-
-        }
+//        tvUserSearch.setOnClickListener {
+//
+//        }
 
         btnUserLogin.setOnClickListener {
             val email = etLoginEmail.text.toString()
