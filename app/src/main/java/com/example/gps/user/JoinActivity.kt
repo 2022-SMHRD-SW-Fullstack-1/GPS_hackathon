@@ -109,7 +109,8 @@ class JoinActivity : AppCompatActivity() {
                             val uid = FBAuth.getUid()
                             var key = FBdatabase.getUserRef().push().key.toString()//uid값을 먼저 만들어줌
 
-                            val userInfo = JoinVO(uid, nick, "임의의값", email,key)
+                            val userInfo = JoinVO(uid, nick, "임의의값", email, key)
+
                             userRef.child(uid).setValue(userInfo)
 
                             Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()

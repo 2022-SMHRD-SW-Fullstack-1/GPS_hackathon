@@ -33,6 +33,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var infoRef: DatabaseReference
     lateinit var civSelectProfile : CircleImageView
     lateinit var imgUrl: String
+    val uid = FBAuth.getUid()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

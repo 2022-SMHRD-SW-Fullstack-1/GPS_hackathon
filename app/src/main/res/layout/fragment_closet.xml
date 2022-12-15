@@ -45,7 +45,7 @@
 
             <Button
                 android:id="@+id/btnChangeProfile"
-                android:layout_width="190dp"
+                android:layout_width="160dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/button_radius_main"
@@ -56,7 +56,7 @@
 
             <Button
                 android:id="@+id/btnInfoChange"
-                android:layout_width="190dp"
+                android:layout_width="160dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/button_radius_main"
@@ -73,33 +73,33 @@
                 android:gravity="center"
                 android:text="게시물"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView9"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintEnd_toEndOf="@+id/tvCntBoard"
+                app:layout_constraintStart_toStartOf="@+id/tvCntBoard"
+                app:layout_constraintTop_toBottomOf="@+id/tvCntBoard" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tvCntComm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="88dp"
+                android:layout_marginStart="65dp"
                 android:gravity="center"
                 android:text="0"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="@+id/textView9" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvCntBoard"
+                app:layout_constraintStart_toEndOf="@+id/tvCntBoard"
+                app:layout_constraintTop_toTopOf="@+id/tvCntBoard" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/tvCntBookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="88dp"
+                android:layout_marginStart="65dp"
                 android:gravity="center"
                 android:text="0"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView10" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvCntComm"
+                app:layout_constraintStart_toEndOf="@+id/tvCntComm"
+                app:layout_constraintTop_toTopOf="@+id/tvCntComm" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -108,9 +108,9 @@
                 android:gravity="center"
                 android:text="댓글"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView10"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintEnd_toEndOf="@+id/tvCntComm"
+                app:layout_constraintStart_toStartOf="@+id/tvCntComm"
+                app:layout_constraintTop_toBottomOf="@+id/tvCntComm" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -119,12 +119,12 @@
                 android:gravity="center"
                 android:text="북마크"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView12"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintEnd_toEndOf="@+id/tvCntBookmark"
+                app:layout_constraintStart_toStartOf="@+id/tvCntBookmark"
+                app:layout_constraintTop_toBottomOf="@+id/tvCntBookmark" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/tvCntBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="44dp"
@@ -135,15 +135,6 @@
                 app:layout_constraintStart_toEndOf="@+id/civProfile"
                 app:layout_constraintTop_toTopOf="@+id/civProfile" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="0dp"
-                android:layout_height="225dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView14"></LinearLayout>
-
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
@@ -153,22 +144,16 @@
                 app:layout_constraintStart_toStartOf="@+id/btnChangeProfile"
                 app:layout_constraintTop_toBottomOf="@+id/btnChangeProfile" />
 
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="내가 쓴 댓글"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMyBoard"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:orientation="vertical"
+                android:layout_height="400dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15"></LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

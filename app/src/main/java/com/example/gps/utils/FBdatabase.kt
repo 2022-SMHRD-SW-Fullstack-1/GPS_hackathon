@@ -18,5 +18,9 @@ class FBdatabase {
         fun getBoardRef() : DatabaseReference{
             return database.getReference("board")
         }
+
+        fun getBookmarkRef(): DatabaseReference{
+            return database.getReference("bookmark")
+        }
     }
 }

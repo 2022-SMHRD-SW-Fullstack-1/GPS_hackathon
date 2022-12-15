@@ -80,14 +80,10 @@ class BoardAdapter(
         holder.tvRvTime.text = boardList[position].time
 
 
-
-
-
-
     }
 
     override fun getItemCount(): Int {
         return boardList.size //항목의 개수
     }
 
-}
+}//

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 import com.example.gps.R
 import com.example.gps.board.BoardAdapter
 import com.example.gps.board.BoardInsideActivity
