@@ -78,39 +78,39 @@
         app:layout_constraintStart_toStartOf="@+id/etJoinNick"
         app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />
 
-<!--    <ScrollView-->
-<!--        android:id="@+id/svJoinCk"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="164dp"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/etJoinNick"-->
-<!--        app:layout_constraintHorizontal_bias="0.498"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/etJoinNick"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView4">-->
+    <!--    <ScrollView-->
+    <!--        android:id="@+id/svJoinCk"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="164dp"-->
+    <!--        android:layout_marginTop="4dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/etJoinNick"-->
+    <!--        app:layout_constraintHorizontal_bias="0.498"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/etJoinNick"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textView4">-->
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical" />-->
-<!--    </ScrollView>-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical" />-->
+    <!--    </ScrollView>-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/textView4"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:text="약관동의"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/etJoinNick"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView4"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:text="약관동의"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/etJoinNick"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />-->
 
-<!--    <CheckBox-->
-<!--        android:id="@+id/cbJoinCk"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:buttonTint="#DBDBDB"-->
-<!--        android:text="동의"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/svJoinCk"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/svJoinCk" />-->
+    <!--    <CheckBox-->
+    <!--        android:id="@+id/cbJoinCk"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:buttonTint="#DBDBDB"-->
+    <!--        android:text="동의"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/svJoinCk"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/svJoinCk" />-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
