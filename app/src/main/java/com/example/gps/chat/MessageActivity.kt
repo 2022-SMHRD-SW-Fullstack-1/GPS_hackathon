@@ -43,7 +43,7 @@ class MessageActivity : AppCompatActivity() {
         setContentView(com.example.gps.R.layout.activity_message)
         val imageView = findViewById<ImageView>(com.example.gps.R.id.messageActivity_ImageView)
         val editText = findViewById<TextView>(com.example.gps.R.id.messageActivity_editText)
-        val imgChatRoomOut = findViewById<ImageView>(com.example.gps.R.id.imgChatRoomOut)
+        val imgChatRoomOut = findViewById<ImageView>(com.example.gps.R.id.imgMessageRoomOut)
 
         //메세지를 보낸 시간
         val time = System.currentTimeMillis()
@@ -120,7 +120,7 @@ class MessageActivity : AppCompatActivity() {
                 }
                 override fun onDataChange(snapshot: DataSnapshot) {
                     friend = snapshot.getValue<Friend>()
-                    messageActivity_textView_topName.text = friend?.nick
+                    messagetActivity_textView_topName.text = friend?.nick
                     getMessageList()
                 }
             })
@@ -178,12 +178,12 @@ class MessageActivity : AppCompatActivity() {
         }
 
         inner class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val textView_message: TextView = view.findViewById(com.example.gps.R.id.messageItem_textView_message)
-            val textView_name: TextView = view.findViewById(com.example.gps.R.id.messageItem_textview_name)
+            val textView_message: TextView = view.findViewById(com.example.gps.R.id.tvCommentMessage)
+            val textView_name: TextView = view.findViewById(com.example.gps.R.id.tvCommentName)
             val imageView_profile: ImageView = view.findViewById(com.example.gps.R.id.messageItem_imageview_profile)
             val layout_destination: LinearLayout = view.findViewById(com.example.gps.R.id.messageItem_layout_destination)
             val layout_main: LinearLayout = view.findViewById(com.example.gps.R.id.messageItem_linearlayout_main)
-            val textView_time : TextView = view.findViewById(com.example.gps.R.id.messageItem_textView_time)
+            val textView_time : TextView = view.findViewById(com.example.gps.R.id.tvCommentTime)
         }
 
         override fun getItemCount(): Int {

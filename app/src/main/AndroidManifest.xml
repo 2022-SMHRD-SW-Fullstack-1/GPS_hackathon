@@ -22,7 +22,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".BookmarkActivity"
+            android:name=".BookmarkActivity"/>
+            
+        <activity
+            android:name=".CommentActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -91,6 +94,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity> <!-- 구글맵 -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"

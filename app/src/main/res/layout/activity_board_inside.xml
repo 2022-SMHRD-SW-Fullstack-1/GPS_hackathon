@@ -55,7 +55,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imgBoardProfile"
         app:layout_constraintTop_toBottomOf="@+id/tvInTime"
-        app:srcCompat="@drawable/kim_contact" />
+        app:srcCompat="@drawable/loading" />
 
     <Button
         android:id="@+id/btnEdit"

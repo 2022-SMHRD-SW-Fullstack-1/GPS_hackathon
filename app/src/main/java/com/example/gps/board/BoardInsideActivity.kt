@@ -11,10 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
+import com.example.gps.utils.FBAuth.Companion.getUid
+
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -28,6 +29,7 @@ class BoardInsideActivity : AppCompatActivity() {
     // 게시물의 uid값이 들어갈 가변 배열
     var keyData = ArrayList<String>()
     lateinit var ref : DatabaseReference
+
 
     lateinit var imgIn: ImageView
     val database = Firebase.database
@@ -60,7 +62,7 @@ class BoardInsideActivity : AppCompatActivity() {
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
         val time = intent.getStringExtra("time")
-        val k = intent.getStringExtra("key")
+
 
         //이미지를 Firebase에서 꺼내올 때 사용할 거임
         val key = intent.getStringExtra("key")
@@ -68,7 +70,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         var like : Boolean = false
         var mark : Boolean = false
-        var cnt : Int= 0
+        var cnt : Int = 0
         tvInTitle.text = title.toString()
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
@@ -80,9 +82,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-
-            var likeCount=tvLikeCount.text.toString()
-
+        var likeCount=tvLikeCount.text.toString()
             if(like==false){
                 like=true
                 imgLike.setImageResource(R.drawable.like)
@@ -114,6 +114,14 @@ class BoardInsideActivity : AppCompatActivity() {
             }
         }
 
+        imgComment.setOnClickListener{
+            val intent = Intent(this@BoardInsideActivity, CommentActivity::class.java)
+            intent.putExtra("key",key)
+            intent.putExtra("uid",uid)
+
+            startActivity(intent)
+        }
+
 
         if(id != uid){
 
@@ -128,7 +136,7 @@ class BoardInsideActivity : AppCompatActivity() {
                 val db = Firebase.database
 
                 // 보드
-                val Content = db.getReference("board").child(k.toString())
+                val Content = db.getReference("board").child(key.toString())
                 Content.setValue(null)
 
 
@@ -149,21 +157,14 @@ class BoardInsideActivity : AppCompatActivity() {
                 val db = Firebase.database
 
                 // 보드
-                val Content = db.getReference("board").child(k.toString())
+                val Content = db.getReference("board").child(key.toString())
                 Content.setValue(null)
 //            val mDatabase = FirebaseDatabase.getInstance();
 //            val dataRef = mDatabase.getReference("board");
 
                 finish()
             }
-
-
-
         }
-
-
-
-
     }
 
 
@@ -190,3 +191,4 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
 }
+//

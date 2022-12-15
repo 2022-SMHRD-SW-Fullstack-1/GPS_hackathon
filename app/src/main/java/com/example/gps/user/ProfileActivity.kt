@@ -13,11 +13,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.R
 import com.example.gps.fragment.ClosetFragment
 import com.example.gps.fragment.HomeFragment
+import com.example.gps.utils.FBAuth
+import com.example.gps.utils.FBdatabase
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
