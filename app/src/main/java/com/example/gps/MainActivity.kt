@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         val weatherList = ArrayList<WeatherVO>()
 
-        tvMap.setOnClickListener {
-            val intent = Intent(this@MainActivity, MapActivity::class.java)
-            startActivity(intent)
-        }
+//        tvMap.setOnClickListener {
+//            val intent = Intent(this@MainActivity, MapActivity::class.java)
+//            startActivity(intent)
+//        }
 
 
         supportFragmentManager.beginTransaction().replace(
