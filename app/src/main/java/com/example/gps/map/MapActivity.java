@@ -56,7 +56,7 @@ import noman.googleplaces.PlacesListener;
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        PlacesListener {
+        PlacesListener{
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
@@ -606,4 +606,6 @@ public class MapActivity extends AppCompatActivity
                 .build()
                 .execute();
     }
+
+
 }

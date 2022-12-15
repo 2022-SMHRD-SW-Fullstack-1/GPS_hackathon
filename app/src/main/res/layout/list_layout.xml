@@ -30,17 +30,4 @@
         app:layout_constraintStart_toStartOf="@+id/tvMapName"
         app:layout_constraintTop_toBottomOf="@+id/tvMapName" />
 
-    <TextView
-        android:id="@+id/tvMapAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="4dp"
-        android:text="지번"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvMapRoad"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tvMapRoad"
-        app:layout_constraintTop_toBottomOf="@+id/tvMapRoad" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
