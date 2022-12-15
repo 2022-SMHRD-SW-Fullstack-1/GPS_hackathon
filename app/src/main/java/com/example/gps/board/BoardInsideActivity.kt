@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
+import com.example.fullstackapplication.utils.FBdatabase
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
@@ -78,14 +79,16 @@ class BoardInsideActivity : AppCompatActivity() {
 //        Log.d("개빡치네2",uid!!)
 
         // 좋아요 버튼
+        FBdatabase.getBoardRef()
         imgLike.setOnClickListener {
-        var likeCount=tvLikeCount.text.toString()
+            var likeCount=tvLikeCount.text.toString()
             if(like==false){
                 like=true
                 imgLike.setImageResource(R.drawable.like)
                 cnt++
                 tvLikeCount.setText("좋아요 $cnt 개")
-                likeRef.push().setValue(likeCount)
+
+                likeRef.push().setValue("좋아요 $cnt 개")
             }else{
                 like=false
                 imgLike.setImageResource(R.drawable.likeup)

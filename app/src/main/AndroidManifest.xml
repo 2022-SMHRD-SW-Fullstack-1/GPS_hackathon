@@ -25,7 +25,6 @@
         <activity
 
             android:name=".MapActivity"
-            android:name=".CommentAdapter"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -102,18 +101,6 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="114977754"/>
 
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".board.BoardWriteActivity"
             android:exported="true">
