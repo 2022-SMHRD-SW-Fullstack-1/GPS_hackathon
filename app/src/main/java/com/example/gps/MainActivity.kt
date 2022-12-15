@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,
-            RankFragment()
+            HomeFragment()
         ).commit()
 
 
