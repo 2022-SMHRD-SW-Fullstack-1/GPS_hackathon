@@ -187,3 +187,4 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
 }
+//
