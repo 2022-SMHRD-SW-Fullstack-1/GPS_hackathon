@@ -23,13 +23,15 @@
 
     <ImageView
         android:id="@+id/imgContent"
-        android:layout_width="140dp"
-        android:layout_height="48dp"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/tvMap"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.388"
-        app:srcCompat="@drawable/item1" />
+        app:srcCompat="@drawable/gpslogo" />
 
     <ImageView
         android:id="@+id/imgLogout"
@@ -74,7 +76,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/imgLogout"
+        app:layout_constraintEnd_toStartOf="@+id/img_Chat"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
