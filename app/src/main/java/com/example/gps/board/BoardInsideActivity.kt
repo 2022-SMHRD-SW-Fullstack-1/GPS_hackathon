@@ -69,7 +69,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         var like : Boolean = false
         var mark : Boolean = false
-        var cnt : Int= 0
+        var cnt : Int = 0
         tvInTitle.text = title.toString()
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
@@ -111,6 +111,11 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
             }
+        }
+
+        imgComment.setOnClickListener{
+            val intent = Intent(this@BoardInsideActivity, CommentActivity::class.java)
+            startActivity(intent)
         }
 
 

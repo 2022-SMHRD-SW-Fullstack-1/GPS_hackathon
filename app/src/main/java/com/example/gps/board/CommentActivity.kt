@@ -3,43 +3,79 @@ package com.example.gps.board
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.gps.R
-import com.google.firebase.database.ktx.database
+import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.gps.databinding.ActivityCommentBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_comment.*
+import com.google.firebase.storage.ktx.storage
 
 class CommentActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityCommentBinding
+    lateinit var adapter: CommentAdapter
+    val cmtList = ArrayList<CommentVO>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comment)
+        binding = ActivityCommentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val key = intent.getStringExtra("key")
-        val nick = intent.getStringExtra("nick")
-        var cList = ArrayList<CommentVO>()
-        val time = FBAuth.getTime()
+        getImageData(intent.getStringExtra("profileUid").toString(), binding.imgCmtProfile)
+        binding.tvCmtNick.setText(intent.getStringExtra("nick"))
+        binding.tvCmtContent.setText(intent.getStringExtra("content"))
+        binding.tvCmtTime.setText(intent.getStringExtra("time"))
 
+        // getCmt()를 호출해서 cmtList가져오기
+        getCommentData(intent.getStringExtra("boardKey").toString())
 
+        adapter = CommentAdapter(this, cmtList)
+        binding.rvCmt.adapter = adapter
+        binding.rvCmt.layoutManager = LinearLayoutManager(this)
 
-        // ~ 닉네임,시간, 보드키 값 받아왔다.
-
-        val msg = etComment.text.toString()
-        // 달고싶은 댓글
-
-        val db = Firebase.database
-        val comment2 = db.getReference("C")
-        //데이터베이스에 저장할 공간 만들어놔따
-
-        cList.add(CommentVO(nick.toString(),"" ,time,key.toString()))
-
-        // 배열에 한 댓글에 들어갈 요소 다 넣었지. 이제 이걸 한 댓글템플릿에 넣어보자
-
-        btnComment.setOnClickListener {
-            comment2.setValue("arr2")
-            Log.d("테스트","왔다")
+        binding.btnCmtSend.setOnClickListener {
+            // database에 저장
+            val boardKey = intent.getStringExtra("boardKey").toString()
+//            var key = FBdatabase.getCommentRef(boardKey).push().key.toString()
+//            FBdatabase.getCommentRef(boardKey).child(key).setValue(CommentVO(binding.etCmt.text.toString(), FBAuth.getUid(), FBAuth.getTime()))
+            binding.etCmt.setText("")
         }
+    }
 
-       // 우선은 세트로 db에 넣는 것부터 해보자
+    fun getCommentData(key: String) {
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                cmtList.clear()
+                // firebase에서 snapshot으로 데이터를 받아온 경우
+                for (model in snapshot.children) {
+                    val item = model.getValue(CommentVO::class.java) as CommentVO
+                    cmtList.add(item)
+                    Log.d("comment", item.toString())
+//                    keyData.add(model.key.toString())
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // 오류가 발생했을 때 실행되는 함수
+            }
+        }
+//        FBdatabase.getCommentRef(key).addValueEventListener(postListener)
+    }
+
+    fun getImageData(uid: String, view: ImageView) {
+        val storageReference = Firebase.storage.reference.child("$uid.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Glide.with(this)
+                    .load(task.result)
+                    .into(view)
+
+            }
+        }
     }
 }
-//

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.fullstackapplication.utils.FBdatabase
+import com.example.gps.MainActivity
 import com.example.gps.chat.MessageActivity
 import com.example.gps.chat.Friend
 import com.example.gps.R
@@ -62,6 +63,12 @@ class ChatFragment1 : Fragment() {
         database = Firebase.database.reference
         val view = inflater.inflate(R.layout.fragment_chat1, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.home_recycler)
+        val imgChatOut = view.findViewById<ImageView>(R.id.imgChatOut)
+
+        imgChatOut.setOnClickListener{
+            val intent = Intent(context, MainActivity::class.java)
+            context?.startActivity(intent)
+        }
 
         infoRef = FBdatabase.getUserRef()
 
