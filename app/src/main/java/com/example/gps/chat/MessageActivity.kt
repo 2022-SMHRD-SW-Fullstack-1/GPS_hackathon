@@ -22,6 +22,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
@@ -119,7 +120,7 @@ class MessageActivity : AppCompatActivity() {
                 }
                 override fun onDataChange(snapshot: DataSnapshot) {
                     friend = snapshot.getValue<Friend>()
-                    messageActivity_textView_topName.text = friend?.name
+                    messageActivity_textView_topName.text = friend?.nick
                     getMessageList()
                 }
             })
@@ -159,11 +160,16 @@ class MessageActivity : AppCompatActivity() {
                 holder.layout_destination.visibility = View.INVISIBLE
                 holder.layout_main.gravity = Gravity.RIGHT
             }else{ // 상대방 채팅
-                Glide.with(holder.itemView.context)
-                    .load(friend?.profileImageUrl)
-                    .apply(RequestOptions().circleCrop())
-                    .into(holder.imageView_profile)
-                holder.textView_name.text = friend?.name
+                val storageReference = Firebase.storage.reference.child("${friend?.profileUrl}.png")
+
+                storageReference.downloadUrl.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Glide.with(holder.itemView.context)
+                            .load(task.result).apply(RequestOptions().circleCrop())
+                            .into(holder.imageView_profile)
+                    }
+                }
+                holder.textView_name.text = friend?.nick
                 holder.layout_destination.visibility = View.VISIBLE
                 holder.textView_name.visibility = View.VISIBLE
                 holder.textView_message.setBackgroundResource(com.example.gps.R.drawable.leftbubble)
