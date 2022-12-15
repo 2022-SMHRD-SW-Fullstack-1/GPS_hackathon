@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
         android:launchMode="singleTop"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -30,7 +30,16 @@
                 android:value="" />
         </activity>
 
+
         <activity
+            android:name=".board.CommentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        
+       <activity
             android:name=".BaseActivity"
             android:exported="false">
             <meta-data
@@ -45,14 +54,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".user.ConfirmActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
 
-        </activity>
         <activity
             android:name=".user.UserActivity"
             android:exported="false">
@@ -62,18 +64,15 @@
         </activity>
         <activity
             android:name=".user.IntroActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity android:name=".chat.ChatActivity" />
         <activity android:name=".chat.MessageActivity" />
+
         <activity
             android:name=".user.JoinActivity"
             android:exported="false">
@@ -83,12 +82,15 @@
         </activity>
         <activity
             android:name=".SplashActivity"
-
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
 
         <!-- 구글맵 -->
@@ -120,7 +122,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
+        
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

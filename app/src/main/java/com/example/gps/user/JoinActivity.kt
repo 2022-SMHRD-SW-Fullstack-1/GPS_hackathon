@@ -1,15 +1,22 @@
 package com.example.gps.user
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.*
 import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBdatabase
+import com.example.fullstackapplication.utils.FBdatabase.Companion.database
 import com.example.gps.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
@@ -17,6 +24,9 @@ class JoinActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     lateinit var profileStorage: FirebaseStorage
+    var email: String = ""
+    var isJoin = true
+    var infoRef = FBdatabase.getUserRef()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,21 +37,20 @@ class JoinActivity : AppCompatActivity() {
         val etJoinPwCk = findViewById<EditText>(R.id.etJoinPwCk)
         val etJoinNick = findViewById<EditText>(R.id.etJoinNick)
         val btnJoin = findViewById<Button>(R.id.btnJoin)
-        val btnJoinEmailCk = findViewById<Button>(R.id.btnJoinEmailCk)
-        val svJoinCk = findViewById<ScrollView>(R.id.svJoinCk)
-        val cbJoinCk = findViewById<CheckBox>(R.id.cbJoinCk)
+        val imgBack = findViewById<ImageView>(R.id.imgBack)
+//        val svJoinCk = findViewById<ScrollView>(R.id.svJoinCk)
+//        val cbJoinCk = findViewById<CheckBox>(R.id.cbJoinCk)
 
         profileStorage = FirebaseStorage.getInstance();
         auth = Firebase.auth
         val userRef = FBdatabase.getUserRef()
 
-        btnJoinEmailCk.setOnClickListener {
-
+        imgBack.setOnClickListener {
+            onBackPressed()
         }
 
         btnJoin.setOnClickListener {
-            var isJoin = true
-            val email = etJoinEmail.text.toString()
+            email = etJoinEmail.text.toString()
             val pw = etJoinPw.text.toString()
             val checkPw = etJoinPwCk.text.toString()
             val nick = etJoinNick.text.toString()
@@ -60,7 +69,7 @@ class JoinActivity : AppCompatActivity() {
                 isJoin = false
                 Toast.makeText(this, "비밀번호 재입력을 입력해주세요", Toast.LENGTH_SHORT).show()
             }
-            if (nick.isEmpty()){
+            if (nick.isEmpty()) {
                 isJoin = false
                 Toast.makeText(this, "닉네임을 입력해주세요", Toast.LENGTH_SHORT).show()
             }
@@ -82,10 +91,10 @@ class JoinActivity : AppCompatActivity() {
                 Toast.makeText(this, "이메일 형식이 아닙니다", Toast.LENGTH_SHORT).show()
             }
 
-            if (!cbJoinCk.isChecked) {
-                isJoin = false
-                Toast.makeText(this, "약관에 동의해주세요", Toast.LENGTH_SHORT).show()
-            }
+//            if (!cbJoinCk.isChecked) {
+//                isJoin = false
+//                Toast.makeText(this, "약관에 동의해주세요", Toast.LENGTH_SHORT).show()
+//            }
 
             if (isJoin) {
                 auth.createUserWithEmailAndPassword(email, pw)
@@ -100,7 +109,7 @@ class JoinActivity : AppCompatActivity() {
                             // 성공했을 때 실행 시킬 코드
                             val uid = FBAuth.getUid()
 
-                            val userInfo = JoinVO(uid, nick, "임의의값")
+                            val userInfo = JoinVO(uid, nick, "임의의값", email)
                             userRef.child(uid).setValue(userInfo)
 
                             Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()
@@ -109,14 +118,22 @@ class JoinActivity : AppCompatActivity() {
 
                             finish()
                         } else {
-                            // 실패했을 때 실행 시킬 코드
-                            Toast.makeText(this, "회원가입 실패..", Toast.LENGTH_SHORT).show()
+                            try{
+                                task.getResult();
+                            }catch (e: Exception) {
+                                Toast.makeText(this, "중복된 이메일입니다", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
-
-
-
             }
+
+            val sharedPreferences = getSharedPreferences("saveLogin", Context.MODE_PRIVATE)
+
+            var editor = sharedPreferences.edit()
+            editor.putString("saveEmail", "")
+            editor.putBoolean("saveCk", false)
+
+            editor.commit()
         }
     }
 }

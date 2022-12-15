@@ -16,15 +16,17 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.gps.fragment.*
 import com.example.gps.weather.WeatherVO
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
 
 import com.example.gps.chat.ChatActivity
 import com.example.gps.fragment.*
 import com.example.gps.user.IntroActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
+
+    private var HomeFragment: HomeFragment? = null
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,23 +47,23 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        imgLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, IntroActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
         supportFragmentManager.beginTransaction().replace(
             R.id.fl,
             HomeFragment()
         ).commit()
 
-
-
         img_Chat.setOnClickListener {
             val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
+        }
+
+
+
+        imgLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
 
@@ -101,9 +103,9 @@ class MainActivity : AppCompatActivity() {
                     ).commit()
                 }
             }
-            true
+                true
+            }
+
         }
-
-
     }
-}
+
