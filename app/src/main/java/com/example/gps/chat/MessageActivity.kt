@@ -178,12 +178,12 @@ class MessageActivity : AppCompatActivity() {
         }
 
         inner class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val textView_message: TextView = view.findViewById(com.example.gps.R.id.messageItem_textView_message)
-            val textView_name: TextView = view.findViewById(com.example.gps.R.id.messageItem_textview_name)
+            val textView_message: TextView = view.findViewById(com.example.gps.R.id.tvCommentMessage)
+            val textView_name: TextView = view.findViewById(com.example.gps.R.id.tvCommentName)
             val imageView_profile: ImageView = view.findViewById(com.example.gps.R.id.messageItem_imageview_profile)
             val layout_destination: LinearLayout = view.findViewById(com.example.gps.R.id.messageItem_layout_destination)
             val layout_main: LinearLayout = view.findViewById(com.example.gps.R.id.messageItem_linearlayout_main)
-            val textView_time : TextView = view.findViewById(com.example.gps.R.id.messageItem_textView_time)
+            val textView_time : TextView = view.findViewById(com.example.gps.R.id.tvCommentTime)
         }
 
         override fun getItemCount(): Int {
