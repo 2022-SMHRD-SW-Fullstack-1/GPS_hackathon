@@ -16,7 +16,6 @@ import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 import com.example.gps.R
 import com.example.gps.SplashActivity
 
-
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
@@ -79,7 +78,9 @@ class BoardInsideActivity : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-            var likeCount=tvLikeCount.text.toString()
+
+        var likeCount=tvLikeCount.text.toString()
+
             if(like==false){
                 like=true
                 imgLike.setImageResource(R.drawable.like)
@@ -96,7 +97,6 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
         }
-
 
         //북마크 칠하기
         imgBookMark.setOnClickListener {
