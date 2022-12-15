@@ -11,15 +11,10 @@ import android.widget.ImageView
 
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.example.gps.fragment.*
 import com.example.gps.weather.WeatherVO
-import org.json.JSONObject
 
 import com.example.gps.chat.ChatActivity
-import com.example.gps.fragment.*
 import com.example.gps.user.IntroActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -35,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val fl = findViewById<FrameLayout>(R.id.fl)
         val imgLogout = findViewById<ImageView>(R.id.imgLogout)
         val img_Chat = findViewById<ImageView>(R.id.img_Chat)
-        val tvMap = findViewById<TextView>(R.id.tvMap)
+        val tvMap = findViewById<ImageView>(R.id.tvMap)
 
         val weatherList = ArrayList<WeatherVO>()
 
