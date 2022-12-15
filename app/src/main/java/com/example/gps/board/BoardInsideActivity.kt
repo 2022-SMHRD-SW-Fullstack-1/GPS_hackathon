@@ -16,9 +16,12 @@ import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 import com.example.gps.R
 
 import com.example.gps.fragment.CommentFragment
+
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+
 
 import com.google.firebase.database.DatabaseReference
 
