@@ -29,7 +29,6 @@ class ClosetFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         changeInfo()
-        Log.d("onResume", "언제 찍히지...")
     }
 
     lateinit var infoRef: DatabaseReference

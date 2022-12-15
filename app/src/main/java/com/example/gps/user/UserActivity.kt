@@ -81,11 +81,10 @@ class UserActivity : AppCompatActivity() {
         val postListener = (object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (model in snapshot.children) {
-                    val item = model.getValue<JoinVO>()
-                    val itemKey = model.key
-                    if (FBAuth.getUid() == item?.uid) {
-                        if (itemKey != null) {
-                            infoRef.child(itemKey).removeValue()
+                    val key = model.key
+                    if (FBAuth.getUid() == key) {
+                        if (key != null) {
+                            infoRef.child(key).removeValue()
                         }
                     }
                 }
