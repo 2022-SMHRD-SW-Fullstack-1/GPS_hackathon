@@ -136,22 +136,22 @@ class BoardWriteActivity : AppCompatActivity() {
 
     }
 
-    // Image를 가져오는 함수 만들기
-    fun getImageData(key : String){
-        val storageReference = Firebase.storage.reference.child("$key.png")
-
-        storageReference.downloadUrl.addOnCompleteListener { task->
-            //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
-            if (task.isSuccessful){
-                Glide.with(this)
-                    .load(task.result)
-                    //into : imgIn에 업로드 하라는 것!
-                    .into(imgIn)
-
-            }
-        }
-
-
-    }
+//    // Image를 가져오는 함수 만들기
+//    fun getImageData(key : String){
+//        val storageReference = Firebase.storage.reference.child("$key.png")
+//
+//        storageReference.downloadUrl.addOnCompleteListener { task->
+//            //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
+//            if (task.isSuccessful){
+//                Glide.with(this)
+//                    .load(task.result)
+//                    //into : imgIn에 업로드 하라는 것!
+//                    .into(imgIn)
+//
+//            }
+//        }
+//
+//
+//    }
 
 }
