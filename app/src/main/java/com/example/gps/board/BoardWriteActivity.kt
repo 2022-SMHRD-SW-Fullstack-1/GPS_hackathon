@@ -1,43 +1,55 @@
 package com.example.gps.board
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.example.gps.R
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.bumptech.glide.Glide
+import com.example.gps.board.BoardVO
 import com.example.gps.utils.FBAuth
 import com.example.gps.utils.FBdatabase
 
-
 class BoardWriteActivity : AppCompatActivity() {
+
+    val REQUEST_IMAGE_CAPTURE = 1
 
     lateinit var imgLoad: ImageView
     lateinit var imgIn: ImageView
+    lateinit var btn_photo: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_write)
+        checkPermission()
 
         //id값 다 찾아오기
         imgLoad = findViewById(R.id.imgLoad)
         val etTitle = findViewById<EditText>(R.id.etTitle)
         val etContent = findViewById<EditText>(R.id.etContent)
         val imgWrite = findViewById<ImageView>(R.id.imgWrite)
+        btn_photo = findViewById(R.id.btn_photo)
 
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
 //        val key = intent.getStringExtra("key")
 
-        if(title != null) {
+        if (title != null) {
             etTitle.setText(title.toString())
             etContent.setText(content.toString())
         }
@@ -45,6 +57,16 @@ class BoardWriteActivity : AppCompatActivity() {
 //        if(key != null) {
 //            getImageData(key.toString())
 //        }
+
+        btn_photo.setOnClickListener {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+                    takePictureIntent.resolveActivity(packageManager)?.also {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                    }
+                }
+        }
+
         //이미지 불러오기
         //갤러리로 이동해서 이미지를 받아오는 역할
         imgLoad.setOnClickListener {
@@ -81,7 +103,7 @@ class BoardWriteActivity : AppCompatActivity() {
 
             //DB에 게시글 작성한 내용 보내기
             //먼저 만들어진 uid를 게시글에 부착!
-            FBdatabase.getBoardRef().child(key).setValue(BoardVO(title, content, uid, time,key))
+            FBdatabase.getBoardRef().child(key).setValue(BoardVO(title, content, uid, time, key))
 
             //부착된 키값을 이미지에도 같이 부착!
             imgUpload(key)
@@ -96,9 +118,9 @@ class BoardWriteActivity : AppCompatActivity() {
     }//onCreate 닫힘
 
     //런처 선언
-    val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         //위에서 갤러리를 불러올 때 사진을 URI 값으로 받아오기 때문에 URI로 찾아오는 거임!
-        if(it.resultCode == RESULT_OK){
+        if (it.resultCode == RESULT_OK) {
             //이미지 미리보기
             imgLoad.setImageURI(it.data?.data)
         }
@@ -106,7 +128,7 @@ class BoardWriteActivity : AppCompatActivity() {
     }
 
     //이미지 업로드
-    fun imgUpload(key: String){
+    fun imgUpload(key: String) {
 
         val storage = Firebase.storage
         val storageRef = storage.reference
@@ -116,12 +138,12 @@ class BoardWriteActivity : AppCompatActivity() {
 
         imgLoad.isDrawingCacheEnabled = true
         imgLoad.buildDrawingCache()
-        val bitmap = (imgLoad.drawable as BitmapDrawable)?.bitmap
+        val bitmap = (imgLoad.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
 
         //사진 압축하는 애
         //(압축하는 애의 타입, 압축의 퀄리티(1~100-보통 50~60으로 설정함),)
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
         val data = baos.toByteArray()
 
         //이미지를 비트맵형태로 가지고 옴 => png로 가져오게 됨
@@ -136,22 +158,64 @@ class BoardWriteActivity : AppCompatActivity() {
 
     }
 
-//    // Image를 가져오는 함수 만들기
-//    fun getImageData(key : String){
-//        val storageReference = Firebase.storage.reference.child("$key.png")
-//
-//        storageReference.downloadUrl.addOnCompleteListener { task->
-//            //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
-//            if (task.isSuccessful){
-//                Glide.with(this)
-//                    .load(task.result)
-//                    //into : imgIn에 업로드 하라는 것!
-//                    .into(imgIn)
-//
-//            }
-//        }
-//
-//
-//    }
+    // Image를 가져오는 함수 만들기
+    fun getImageData(key: String) {
+        val storageReference = Firebase.storage.reference.child("$key.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
+            if (task.isSuccessful) {
+                Glide.with(this)
+                    .load(task.result)
+                    //into : imgIn에 업로드 하라는 것!
+                    .into(imgIn)
+
+            }
+        }
+
+
+    }
+
+    private fun checkPermission() {
+        var permission = mutableMapOf<String, String>()
+        permission["camera"] = Manifest.permission.CAMERA
+//        permission["storageRead"] = Manifest.permission.READ_EXTERNAL_STORAGE
+//        permission["storageWrite"] =  Manifest.permission.WRITE_EXTERNAL_STORAGE
+
+        var denied = permission.count { ContextCompat.checkSelfPermission(this, it.value)  == PackageManager.PERMISSION_DENIED }
+
+        if(denied > 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            requestPermissions(permission.values.toTypedArray(), REQUEST_IMAGE_CAPTURE)
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == REQUEST_IMAGE_CAPTURE) {
+            var count = grantResults.count { it == PackageManager.PERMISSION_DENIED }
+
+            if(count != 0) {
+                Toast.makeText(applicationContext, "권한을 동의해주세요.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+
+            imgLoad.setImageBitmap(imageBitmap)
+        }
+    }
+
+
 
 }
