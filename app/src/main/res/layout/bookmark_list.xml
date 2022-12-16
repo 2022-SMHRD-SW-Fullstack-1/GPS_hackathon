@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:text="게시글 이름"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -30,31 +31,11 @@
         android:id="@+id/tvBmTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
         android:text="날짜"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/tvBmBoardTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvBmBoardTitle" />
-
-    <TextView
-        android:id="@+id/tvBmBoardName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="게시판이름"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/ivBmImg"
-        app:layout_constraintStart_toStartOf="@+id/tvBmTime" />
-
-    <TextView
-        android:id="@+id/tvBmNick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="작성자"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/tvBmTime"
-        app:layout_constraintStart_toEndOf="@+id/tvBmTime"
-        app:layout_constraintTop_toTopOf="@+id/tvBmTime" />
+        app:layout_constraintStart_toStartOf="@+id/tvBmBoardTitle" />
 
     <ImageView
         android:id="@+id/ivBmBookmark"

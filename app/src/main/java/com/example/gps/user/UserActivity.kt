@@ -108,6 +108,7 @@ class UserActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
 
+
             } else {
                 Toast.makeText(this, task.exception.toString(), Toast.LENGTH_LONG).show()
             }

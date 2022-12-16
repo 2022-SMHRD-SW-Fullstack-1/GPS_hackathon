@@ -201,9 +201,10 @@ class BoardInsideActivity : AppCompatActivity() {
     fun getBookmarkData(key: String?) {
         val bookmarkListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                var value = snapshot.getValue<BoardVO>()?.key.toString()
-                Log.d("스냅샷", value)
+                val value = snapshot.getValue<BoardVO>()?.key.toString()
 
+                // firebase 내 저장된 key값(게시글 uid)과
+                // 사용자가 클릭한 게시글의 uid를 비교
                 if (key != value) {
                     isMark = false
                     imgBookMark.setImageResource(R.drawable.mark_white)

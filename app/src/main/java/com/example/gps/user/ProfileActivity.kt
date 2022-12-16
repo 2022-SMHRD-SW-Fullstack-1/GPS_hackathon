@@ -140,7 +140,7 @@ class ProfileActivity : AppCompatActivity() {
 
         civSelectProfile.isDrawingCacheEnabled = true
         civSelectProfile.buildDrawingCache()
-        val bitmap = (civSelectProfile.drawable as BitmapDrawable?)?.bitmap
+        val bitmap = (civSelectProfile.drawable as BitmapDrawable)?.bitmap
         val baos = ByteArrayOutputStream()
         //quality:압축 퀄리티 1~100.
         bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, baos)
