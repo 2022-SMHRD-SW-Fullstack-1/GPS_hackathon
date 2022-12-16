@@ -1,14 +1,16 @@
 package com.example.gps.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -21,11 +23,13 @@ class HomeFragment : Fragment() {
     private var HomeFragment: HomeFragment? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
 
 
         val imgWeatherState = view.findViewById<ImageView>(R.id.imgWeatherState)
@@ -89,8 +93,6 @@ class HomeFragment : Fragment() {
         tvCity.visibility = View.INVISIBLE
         tvState.visibility = View.INVISIBLE
 
-        //처음 화면에 아무것도 안 보이게 하기
-
 
         view.setOnClickListener {
             var state = weatherList.get(0).state
@@ -128,9 +130,29 @@ class HomeFragment : Fragment() {
 
         }
 
+
+
         return view
 
+
     }
+
+//     Fragment 새로고침
+//fun refreshFragment(context: Context?) {
+//    context?.let{
+//        val fragmentManager = (context as AppCompatActivity)?.supportFragmentManager
+//        fragmentManager?.let{
+//            val currentFragment = fragmentManager.findFragmentById(R.id.flWeather)
+//            currentFragment?.let {
+//                val fragmentTransaction = fragmentManager.beginTransaction()
+//                fragmentTransaction.detach(it)
+//                fragmentTransaction.attach(it)
+//                fragmentTransaction.commit()
+//            }
+//        }
+//    }
+//}
+
 
 }
 //5차 수정
