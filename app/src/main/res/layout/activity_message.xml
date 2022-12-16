@@ -23,15 +23,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="0"
-            app:srcCompat="@drawable/arrow_back_24" />
+            app:srcCompat="@drawable/chatlogout" />
 
         <TextView
             android:id="@+id/messagetActivity_textView_topName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="6.5dp"
             android:fontFamily="sans-serif"
             android:text="친구"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
