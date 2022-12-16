@@ -78,39 +78,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvCntBoard" />
 
             <TextView
-                android:id="@+id/tvCntComm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCntBoard"
-                app:layout_constraintStart_toEndOf="@+id/tvCntBoard"
-                app:layout_constraintTop_toTopOf="@+id/tvCntBoard" />
-
-            <TextView
                 android:id="@+id/tvCntBookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
+                android:layout_marginEnd="100dp"
                 android:gravity="center"
                 android:text="0"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCntComm"
-                app:layout_constraintStart_toEndOf="@+id/tvCntComm"
-                app:layout_constraintTop_toTopOf="@+id/tvCntComm" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="댓글"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/tvCntComm"
-                app:layout_constraintStart_toStartOf="@+id/tvCntComm"
-                app:layout_constraintTop_toBottomOf="@+id/tvCntComm" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvCntBoard" />
 
             <TextView
                 android:id="@+id/tvClosetBm"
