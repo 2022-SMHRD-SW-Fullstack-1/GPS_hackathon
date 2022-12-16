@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
+import kotlin.coroutines.CoroutineContext
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -44,4 +45,6 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_base)
 
     }
+
+    abstract val coroutineContext: CoroutineContext
 }
