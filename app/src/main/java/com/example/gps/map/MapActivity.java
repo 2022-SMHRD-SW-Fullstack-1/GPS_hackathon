@@ -142,7 +142,6 @@ public class MapActivity extends AppCompatActivity
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
 
-
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -150,16 +149,14 @@ public class MapActivity extends AppCompatActivity
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
+        // 2. 이미 퍼미션을 가지고 있다면 위치 업데이트 시작
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
 
-            // 2. 이미 퍼미션을 가지고 있다면
+
             // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
 
-
             startLocationUpdates(); // 3. 위치 업데이트 시작
-
 
         } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
 
@@ -179,7 +176,6 @@ public class MapActivity extends AppCompatActivity
                     }
                 }).show();
 
-
             } else {
                 // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
                 // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
@@ -189,10 +185,8 @@ public class MapActivity extends AppCompatActivity
 
         }
 
-
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        // 현재 오동작을 해서 주석처리
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
