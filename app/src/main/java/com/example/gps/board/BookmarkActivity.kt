@@ -21,13 +21,12 @@ class BookmarkActivity : AppCompatActivity() {
     val bookmarkRef = FBdatabase.getBookmarkRef()
     val boardRef = FBdatabase.getBoardRef()
 
-//    var userList = ArrayList<JoinVO>()
     var data = ArrayList<BoardVO>()
-    var keyData = ArrayList<String>() // ListVO를 포함하는 게시물의 uid
+    var keyData = ArrayList<String>() // VO포함 게시물의 uid
     var bookmarkList = ArrayList<String>() // 내가 선택한 게시물 uid
 
     lateinit var adapter: BookmarkAdapter
-    var bmCnt : String = ""
+    var bmCnt: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +48,6 @@ class BookmarkActivity : AppCompatActivity() {
     }
 
     fun getContentData() {
-        // content 경로에 있는 데이터를 다 가지고 오기
-        // uid ---> keyData
-        // ㄴ> ListVO ---> data
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (model in snapshot.children) {
@@ -87,20 +83,7 @@ class BookmarkActivity : AppCompatActivity() {
                 }
                 adapter.notifyDataSetChanged()
                 getContentData()
-                bmCnt = bookmarkList.size.toString()
 
-//                var ClosetFragment = ClosetFragment()
-//                var bundle = Bundle()
-//
-//                bundle.putString("bmCnt", bmCnt)
-//                ClosetFragment.arguments = bundle
-//                //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
-//
-//                supportFragmentManager.beginTransaction()
-//                    .replace(R.id.fl, ClosetFragment)
-//                    .commit()
-
-//                Log.d("북마크사이즈", bundle.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {

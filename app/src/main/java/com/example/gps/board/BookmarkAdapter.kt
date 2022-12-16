@@ -21,15 +21,11 @@ class BookmarkAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvBmBoardTitle : TextView
         val tvBmTime : TextView
-        val tvBmNick : TextView
-        val tvBmBoardName : TextView
         val ivBmBookmark : ImageView
         val ivBmImg : ImageView
 
         init {
-            tvBmBoardName = itemView.findViewById(R.id.tvBmBoardName)
             tvBmTime = itemView.findViewById(R.id.tvBmTime)
-            tvBmNick = itemView.findViewById(R.id.tvBmNick)
             tvBmBoardTitle = itemView.findViewById(R.id.tvBmBoardTitle)
             ivBmBookmark = itemView.findViewById(R.id.ivBmBookmark)
             ivBmImg = itemView.findViewById(R.id.ivBmImg)
@@ -45,12 +41,11 @@ class BookmarkAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvBmBoardTitle.setText(bookmarkList.get(position).title)
         holder.tvBmTime.setText(bookmarkList.get(position).time)
-//        holder.tvBmNick.setText(userList.get(position).nick)
         holder.ivBmBookmark.setImageResource(R.drawable.mark_black)
 
-//        Glide.with(context)
-//            .load(userList[position].uid)
-//            .into(holder.ivBmImg)
+        Glide.with(context)
+            .load(bookmarkList[position].uid)
+            .into(holder.ivBmImg)
     }
 
     override fun getItemCount(): Int {

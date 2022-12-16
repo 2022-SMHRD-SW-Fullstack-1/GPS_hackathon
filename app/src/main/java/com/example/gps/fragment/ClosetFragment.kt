@@ -1,23 +1,25 @@
 package com.example.gps.fragment
 
 import android.content.Intent
-import android.graphics.Paint.Join
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.disklrucache.DiskLruCache.Value
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.signature.ObjectKey
 import com.example.gps.R
 import com.example.gps.board.*
-import com.example.gps.user.JoinVO
 import com.example.gps.user.ProfileActivity
 import com.example.gps.user.UserActivity
 import com.example.gps.utils.FBAuth
@@ -32,6 +34,7 @@ import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_closet.*
 import kotlinx.android.synthetic.main.fragment_closet.view.*
+
 
 class ClosetFragment : Fragment() {
     override fun onResume() {
@@ -99,8 +102,6 @@ class ClosetFragment : Fragment() {
 
         })
 
-//        adapter2 = BookmarkAdapter(requireContext(), bmList)
-
         tvClosetBm.setOnClickListener {
             val intent = Intent(context, BookmarkActivity::class.java)
             startActivity(intent)
@@ -132,6 +133,8 @@ class ClosetFragment : Fragment() {
                 //Gilde: 웹에 있는 이미지 적용하는 라이브러리
                 Glide.with(this)
                     .load(task.result)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(civProfile) //지역변수
             }
         }
