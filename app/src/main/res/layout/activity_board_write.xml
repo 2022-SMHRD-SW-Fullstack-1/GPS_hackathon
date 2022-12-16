@@ -54,5 +54,17 @@
         app:layout_constraintEnd_toEndOf="@+id/imgLoad"
         app:srcCompat="@drawable/btnwrite" />
 
+    <Button
+        android:id="@+id/btn_photo"
+        android:layout_width="100dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="사진찍기"
+        app:layout_constraintEnd_toEndOf="@+id/imgLoad"
+        app:layout_constraintStart_toStartOf="@+id/imgLoad"
+        app:layout_constraintTop_toBottomOf="@+id/imgLoad" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

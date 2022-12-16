@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 
 //Fragment3에 있는 rvBoard에 적용될 Adapter
 class BoardAdapter(
@@ -46,12 +47,14 @@ class BoardAdapter(
         val tvRvTitle: TextView
         val tvRvContent: TextView
         val tvRvTime: TextView
+        val tvNick : TextView
 
 
         init {
             tvRvTitle = itemView.findViewById(R.id.tvRvTitle)
             tvRvContent = itemView.findViewById(R.id.tvRvContent)
             tvRvTime = itemView.findViewById(R.id.tvRvTime)
+            tvNick = itemView.findViewById(R.id.tvNick)
 
             //리스너 커스텀 초기화
             itemView.setOnClickListener {
@@ -78,6 +81,7 @@ class BoardAdapter(
         holder.tvRvTitle.text = boardList[position].title
         holder.tvRvContent.text = boardList[position].content
         holder.tvRvTime.text = boardList[position].time
+        holder.tvNick.text = boardList[position].nick
 
 
 

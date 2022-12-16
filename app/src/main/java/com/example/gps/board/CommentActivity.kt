@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.fullstackapplication.utils.FBAuth
+import com.example.fullstackapplication.utils.FBdatabase
 import com.example.gps.databinding.ActivityCommentBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

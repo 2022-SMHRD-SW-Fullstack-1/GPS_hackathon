@@ -81,13 +81,13 @@
 
     <ImageView
         android:id="@+id/img_Chat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvMap"
         app:layout_constraintEnd_toStartOf="@+id/tvMap"
         app:layout_constraintTop_toTopOf="@+id/tvMap"
-        app:srcCompat="@drawable/ic_baseline_mode_comment_32" />
+        app:srcCompat="@drawable/pngwing" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

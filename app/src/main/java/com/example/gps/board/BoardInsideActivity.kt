@@ -15,10 +15,9 @@ import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 
 import com.example.gps.R
 import com.example.gps.SplashActivity
+import com.google.firebase.database.*
 
 
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -28,7 +27,8 @@ class BoardInsideActivity : AppCompatActivity() {
 
     // 게시물의 uid값이 들어갈 가변 배열
     var keyData = ArrayList<String>()
-    lateinit var ref : DatabaseReference
+    lateinit var ref: DatabaseReference
+    private var boardkey: String? = null
 
     lateinit var imgIn: ImageView
     val database = Firebase.database
@@ -37,7 +37,7 @@ class BoardInsideActivity : AppCompatActivity() {
         setContentView(R.layout.activity_board_inside)
 
         //게시글 상세페이지
-        val likeRef=database.getReference("like")
+        val likeRef = database.getReference("board")
         //id값
         val tvInTitle = findViewById<TextView>(R.id.tvInTitle)
         val tvInTime = findViewById<TextView>(R.id.tvInTime)
@@ -56,20 +56,20 @@ class BoardInsideActivity : AppCompatActivity() {
         imgIn = findViewById(R.id.imgIn)
 
 
-
         //해당 게시물의 상세내용을 가져와서 set해주자!
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
         val time = intent.getStringExtra("time")
         val k = intent.getStringExtra("key")
+        val likeNum = intent.getStringExtra("likeNum")
 
         //이미지를 Firebase에서 꺼내올 때 사용할 거임
         val key = intent.getStringExtra("key")
         val uid = intent.getStringExtra("uid")
 
-        var like : Boolean = false
-        var mark : Boolean = false
-        var cnt : Int = 0
+        var like: Boolean = false
+        var mark: Boolean = false
+        var cnt = likeNum
         tvInTitle.text = title.toString()
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
@@ -81,52 +81,65 @@ class BoardInsideActivity : AppCompatActivity() {
 
         // 좋아요 버튼
         imgLike.setOnClickListener {
-        var likeCount=tvLikeCount.text.toString()
-            if(like==false){
-                like=true
-                imgLike.setImageResource(R.drawable.like)
-                cnt++
-                tvLikeCount.setText("좋아요 $cnt 개")
-                likeRef.push().setValue(likeCount)
-            }else{
-                like=false
-                imgLike.setImageResource(R.drawable.likeup)
-                cnt--
-                tvLikeCount.setText("좋아요 $cnt 개")
-                likeRef.removeValue()
-            }
+            val coma = "-NJKLz3Dcma7C4fSZw31"
+            likeRef.child(coma).addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var likeCount = snapshot.child("likeCount").value.toString().toInt()
+
+                    if (like == false) {
+                        like = true
+                        likeCount++
+                        imgLike.setImageResource(R.drawable.like)
+                        tvLikeCount.setText("좋아요 $likeCount 개")
+
+                    } else {
+                        like = false
+                        if (likeCount > 0) {
+                            likeCount--
+                        }
+                        imgLike.setImageResource(R.drawable.likeup)
+                        tvLikeCount.setText("좋아요 $likeCount 개")
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
 
 
         }
 
         //북마크 칠하기
         imgBookMark.setOnClickListener {
-            if(mark==false){
-                mark=true
+            if (mark == false) {
+                mark = true
                 imgBookMark.setImageResource(R.drawable.mark_black)
 
-            }else{
-                mark=false
+            } else {
+                mark = false
                 imgBookMark.setImageResource(R.drawable.mark_white)
 
 
             }
         }
 
-        imgComment.setOnClickListener{
+        imgComment.setOnClickListener {
             val intent = Intent(this@BoardInsideActivity, CommentActivity::class.java)
             startActivity(intent)
         }
 
 
-        if(id != uid){
+        if (id != uid) {
 
             btnEdit.visibility = View.INVISIBLE
             btnRemove.visibility = View.INVISIBLE
         }
 
 
-        if (id == uid){
+        if (id == uid) {
             btnEdit.setOnClickListener {
 
                 val db = Firebase.database
@@ -137,9 +150,9 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
                 val intent = Intent(this@BoardInsideActivity, BoardWriteActivity::class.java)
-                intent.putExtra("title",title)
-                intent.putExtra("content",content)
-                intent.putExtra("key",key)
+                intent.putExtra("title", title)
+                intent.putExtra("content", content)
+                intent.putExtra("key", key)
 
 
 //            intent.putExtra("image",content)
@@ -162,24 +175,19 @@ class BoardInsideActivity : AppCompatActivity() {
             }
 
 
-
         }
-
-
 
 
     }
 
 
-
-
     // Image를 가져오는 함수 만들기
-    fun getImageData(key : String){
+    fun getImageData(key: String) {
         val storageReference = Firebase.storage.reference.child("$key.png")
 
-        storageReference.downloadUrl.addOnCompleteListener { task->
+        storageReference.downloadUrl.addOnCompleteListener { task ->
             //task: 데이터를 가져오는데 성공했는지 여부와 데이터 정보를 가지고 있음
-            if (task.isSuccessful){
+            if (task.isSuccessful) {
                 Glide.with(this)
                     .load(task.result)
                     //into : imgIn에 업로드 하라는 것!
@@ -190,7 +198,6 @@ class BoardInsideActivity : AppCompatActivity() {
 
 
     }
-
 
 
 }
