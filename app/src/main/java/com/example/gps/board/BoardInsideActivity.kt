@@ -53,7 +53,7 @@ class BoardInsideActivity : AppCompatActivity() {
 
         val btnEdit = findViewById<Button>(R.id.btnEdit)
         val btnRemove = findViewById<Button>(R.id.btnRemove)
-
+        val tvBoardInsideNick = findViewById<TextView>(R.id.tvBoardInsideNick)
 
         val tvLikeCount = findViewById<TextView>(R.id.tvLikeCount)
         val imgLike = findViewById<ImageView>(R.id.imgLike)
@@ -79,6 +79,17 @@ class BoardInsideActivity : AppCompatActivity() {
         tvInTitle.text = title.toString()
         tvInContent.text = content.toString()
         tvInTime.text = time.toString()
+
+        FBdatabase.getUserRef().child("$uid").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                tvBoardInsideNick.text = snapshot.child("nick").value.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
         getImageData(key.toString())
 
