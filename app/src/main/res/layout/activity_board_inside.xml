@@ -11,13 +11,14 @@
     <TextView
         android:id="@+id/tvInTitle"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:background="@color/black"
         android:gravity="center"
         android:text="제목"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,23 +27,23 @@
         android:id="@+id/tvInTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="시간"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvInTitle" />
 
     <TextView
         android:id="@+id/tvInContent"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
         android:background="#E8E8E8"
         android:backgroundTint="#FFFFFF"
         android:text="게시글 내용"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imgBookMark"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvInTime"
+        app:layout_constraintStart_toStartOf="@+id/imgLike"
         app:layout_constraintTop_toBottomOf="@+id/imgComment" />
 
     <ImageView
@@ -50,40 +51,46 @@
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tvInContent"
+        app:layout_constraintEnd_toEndOf="@+id/tvInTime"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/tvInContent"
+        app:layout_constraintStart_toStartOf="@+id/imgBoardProfile"
         app:layout_constraintTop_toBottomOf="@+id/tvInTime"
-        app:srcCompat="@drawable/kim_contact" />
+        app:srcCompat="@drawable/loading" />
 
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="62dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/button_radius_main"
         android:backgroundTint="#000000"
-        android:text="수 정"
+        android:text="수정"
+        android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnRemove"
-        app:layout_constraintEnd_toStartOf="@+id/btnRemove" />
+        app:layout_constraintEnd_toStartOf="@+id/btnRemove"
+        app:layout_constraintTop_toTopOf="@+id/btnRemove" />
 
     <Button
         android:id="@+id/btnRemove"
         android:layout_width="62dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/button_radius_main"
         android:backgroundTint="#000000"
         android:text="삭제"
+        android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInTitle" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvInContent" />
 
     <TextView
         android:id="@+id/tvLikeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="좋아요 0 개"
         app:layout_constraintStart_toStartOf="@+id/imgIn"
         app:layout_constraintTop_toBottomOf="@+id/imgIn" />
@@ -92,6 +99,7 @@
         android:id="@+id/imgComment"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintStart_toEndOf="@+id/imgLike"
         app:layout_constraintTop_toTopOf="@+id/imgLike"
         app:srcCompat="@drawable/imgchat" />
@@ -100,7 +108,7 @@
         android:id="@+id/imgBookMark"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintStart_toEndOf="@+id/imgComment"
+        app:layout_constraintEnd_toEndOf="@+id/imgIn"
         app:layout_constraintTop_toTopOf="@+id/imgComment"
         app:srcCompat="@drawable/mark_white" />
 
@@ -111,6 +119,34 @@
         app:layout_constraintStart_toStartOf="@+id/tvLikeCount"
         app:layout_constraintTop_toBottomOf="@+id/tvLikeCount"
         app:srcCompat="@drawable/likeup" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="66dp" />
+
+    <ImageView
+        android:id="@+id/imgBoardProfile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        app:srcCompat="@drawable/ic_baseline_person_24" />
+
+    <TextView
+        android:id="@+id/tvBoardInsideNick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="닉네임"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/imgBoardProfile"
+        app:layout_constraintStart_toEndOf="@+id/imgBoardProfile"
+        app:layout_constraintTop_toTopOf="@+id/imgBoardProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

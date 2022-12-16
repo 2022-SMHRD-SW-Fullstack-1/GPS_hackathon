@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imgChatRoomOut"
+            android:id="@+id/imgMessageRoomOut"
             android:layout_width="32dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
@@ -26,7 +26,7 @@
             app:srcCompat="@drawable/arrow_back_24" />
 
         <TextView
-            android:id="@+id/messageActivity_textView_topName"
+            android:id="@+id/messagetActivity_textView_topName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

@@ -7,10 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.*
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBdatabase
-import com.example.fullstackapplication.utils.FBdatabase.Companion.database
 import com.example.gps.R
+import com.example.gps.utils.FBAuth
+import com.example.gps.utils.FBdatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -108,8 +107,10 @@ class JoinActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // 성공했을 때 실행 시킬 코드
                             val uid = FBAuth.getUid()
+                            var key = FBdatabase.getUserRef().push().key.toString()//uid값을 먼저 만들어줌
 
-                            val userInfo = JoinVO(uid, nick, "임의의값", email)
+                            val userInfo = JoinVO(uid, nick, "임의의값", email, key)
+
                             userRef.child(uid).setValue(userInfo)
 
                             Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()

@@ -4,9 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBdatabase
+
 import com.example.gps.R
+import com.example.gps.utils.FBAuth
+import com.example.gps.utils.FBdatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
