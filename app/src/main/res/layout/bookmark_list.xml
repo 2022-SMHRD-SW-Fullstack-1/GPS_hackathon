@@ -9,10 +9,20 @@
         android:id="@+id/tvBmBoardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:text="게시글 이름"
         android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/ivBmImg"
+        app:layout_constraintTop_toTopOf="@+id/ivBmImg" />
+
+    <TextView
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,13 +40,10 @@
         android:id="@+id/tvBmBoardName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
         android:text="게시판이름"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvBmTime"
-        app:layout_constraintTop_toBottomOf="@+id/tvBmTime" />
+        app:layout_constraintBottom_toBottomOf="@+id/ivBmImg"
+        app:layout_constraintStart_toStartOf="@+id/tvBmTime" />
 
     <TextView
         android:id="@+id/tvBmNick"
@@ -53,9 +60,21 @@
         android:id="@+id/ivBmBookmark"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mark_white" />
+        app:srcCompat="@drawable/mark_black" />
+
+    <ImageView
+        android:id="@+id/ivBmImg"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/loading" />
 </androidx.constraintlayout.widget.ConstraintLayout>

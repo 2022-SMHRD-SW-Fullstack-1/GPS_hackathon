@@ -116,12 +116,12 @@ class BoardWriteActivity : AppCompatActivity() {
 
         imgLoad.isDrawingCacheEnabled = true
         imgLoad.buildDrawingCache()
-        val bitmap = (imgLoad.drawable as BitmapDrawable).bitmap
+        val bitmap = (imgLoad.drawable as BitmapDrawable)?.bitmap
         val baos = ByteArrayOutputStream()
 
         //사진 압축하는 애
         //(압축하는 애의 타입, 압축의 퀄리티(1~100-보통 50~60으로 설정함),)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, baos)
         val data = baos.toByteArray()
 
         //이미지를 비트맵형태로 가지고 옴 => png로 가져오게 됨

@@ -14,11 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.disklrucache.DiskLruCache.Value
 import com.example.gps.R
-import com.example.gps.board.BoardAdapter
-import com.example.gps.board.BoardInsideActivity
-import com.example.gps.board.BoardVO
-import com.example.gps.board.MyBoardAdapter
+import com.example.gps.board.*
 import com.example.gps.user.JoinVO
 import com.example.gps.user.ProfileActivity
 import com.example.gps.user.UserActivity
@@ -33,6 +31,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_closet.*
+import kotlinx.android.synthetic.main.fragment_closet.view.*
 
 class ClosetFragment : Fragment() {
     override fun onResume() {
@@ -45,10 +44,13 @@ class ClosetFragment : Fragment() {
     lateinit var civProfile: CircleImageView
     lateinit var tvClosetNick: TextView
     lateinit var adapter: MyBoardAdapter
+    lateinit var adapter2: BookmarkAdapter
     val myBoardList = ArrayList<BoardVO>()
+    val bookmarkRef = FBdatabase.getBookmarkRef()
     var nickname: String = ""
     var imgUrl: String = ""
     val uid = FBAuth.getUid()
+    var bmList = ArrayList<String>()
 
     //이미지 정보 넘겨줄 key값을 저장할 배열 만들기
     var keyData = ArrayList<String>()
@@ -63,20 +65,23 @@ class ClosetFragment : Fragment() {
         val btnChangeProfile = view.findViewById<Button>(R.id.btnChangeProfile)
         val btnInfoChange = view.findViewById<Button>(R.id.btnInfoChange)
         var tvCntBoard = view.findViewById<TextView>(R.id.tvCntBoard)
+        var tvCntBookmark = view.findViewById<TextView>(R.id.tvCntBookmark)
         civProfile = view.findViewById(R.id.civProfile)
         val rvMyBoard = view.findViewById<RecyclerView>(R.id.rvMyBoard)
+        val tvClosetBm = view.findViewById<TextView>(R.id.tvClosetBm)
 
         infoRef = FBdatabase.getUserRef()
         boardRef = FBdatabase.getBoardRef()
 
         getMyBoardList()
+        getMyBookmarkList()
 
         adapter = MyBoardAdapter(requireContext(), myBoardList)
         rvMyBoard.adapter = adapter
 
         rvMyBoard.layoutManager = LinearLayoutManager(context)
 
-        adapter.setOnItemClickListener(object : MyBoardAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : MyBoardAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 //BoardInsideActivity로 넘어가자~
 
@@ -93,6 +98,13 @@ class ClosetFragment : Fragment() {
             }
 
         })
+
+//        adapter2 = BookmarkAdapter(requireContext(), bmList)
+
+        tvClosetBm.setOnClickListener {
+            val intent = Intent(context, BookmarkActivity::class.java)
+            startActivity(intent)
+        }
 
         btnInfoChange.setOnClickListener {
             val intent = Intent(context, UserActivity::class.java)
@@ -142,6 +154,32 @@ class ClosetFragment : Fragment() {
         infoRef.addValueEventListener(postListener)
     }
 
+    fun getMyBookmarkList() {
+        val bmListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                bmList.clear()
+
+                for (model in snapshot.children) {
+                    Log.d("북칠드런", model.key.toString())
+                    bmList.add(model.key.toString())
+                }
+                if (bmList.size < 1) {
+                    tvCntBookmark.text = 0.toString()
+                } else {
+                    Log.d("북마크카운트", bmList.toString())
+                    tvCntBookmark.text = bmList.size.toString()
+                }
+//                adapter2.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        bookmarkRef.child(FBAuth.getUid()).addValueEventListener(bmListener)
+    }
+
     fun getMyBoardList() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -151,7 +189,11 @@ class ClosetFragment : Fragment() {
                     val item = model.getValue<BoardVO>()
                     if (item != null && item.uid == FBAuth.getUid()) {
                         myBoardList.add(item)
-                        tvCntBoard.text = myBoardList.size.toString()
+                        if (myBoardList.size < 1) {
+                            tvCntBoard.text = 0.toString()
+                        } else {
+                            tvCntBoard.text = myBoardList.size.toString()
+                        }
                     }
                     keyData.add(model.key.toString())
                 }
