@@ -33,7 +33,8 @@
 * 비트맵을 통한 이미지 업로드
 
 ## 개발 환경
-![image](https://user-images.githubusercontent.com/108584477/208058467-9e5ff3ec-945c-4df8-a872-8b64b906ba18.png)
+![image](https://user-images.githubusercontent.com/108584477/208331329-54c69da9-da14-4fdc-b35d-3baad779a6d6.png)
+
 
 
 
