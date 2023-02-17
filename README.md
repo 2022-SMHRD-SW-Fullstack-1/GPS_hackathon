@@ -2,7 +2,7 @@
 ![image](https://user-images.githubusercontent.com/112377313/208052299-7130cbfd-0bdf-41c8-9edd-9197444b772f.png)
 ### :날짜: 개발 기간
 * 22.12.12 ~ 22.12.16 (5일)
-### :책: 프로젝트 개발스택
+### :개발환경: 프로젝트 개발스택
 * 사용 언어<br/> <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=Kotlin&logoColor=white"/><br/>
 * 개발도구<br/> <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"/><br/>
 * 인프라구조<br/> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white"/> <br/>
